@@ -1,0 +1,16 @@
+include: package:flutter_lints/flutter.yaml
+
+analyzer:
+  exclude:
+    - "flutter/**"
+    - "flutter/dev/**"
+    - "flutter/packages/**"
+    - "flutter/examples/**"
+    - "build/**"
+    - ".dart_tool/**"
+
+linter:
+  rules:
+    prefer_const_constructors: true
+    prefer_const_declarations: true
+    avoid_print: true

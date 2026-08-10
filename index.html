@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#0b1329">
+  <meta name="description" content="ECCO Steel Mesh Quotation System">
+  <title>ECCO Steel - Official ECCO Steel Quotation Generator</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-gradient: linear-gradient(180deg, #0b1329 0%, #111c3a 50%, #0b1329 100%);
+      --bg-color: #0b1329;
+      --card-bg: rgba(23, 33, 60, 0.85);
+      --card-border: rgba(255, 255, 255, 0.14);
+      --input-bg: rgba(11, 19, 41, 0.85);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+
+      --primary: #38bdf8;
+      --primary-gradient: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
+      --accent-amber: #f59e0b;
+      --accent-amber-gradient: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
+      --accent-emerald: #10b981;
+      --accent-emerald-gradient: linear-gradient(135deg, #34d399 0%, #059669 100%);
+      --accent-purple: #c084fc;
+      --accent-purple-gradient: linear-gradient(135deg, #c084fc 0%, #9333ea 100%);
+      --accent-red: #f43f5e;
+
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.25);
+      --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.45);
+      --radius-sm: 12px;
+      --radius-md: 18px;
+      --radius-lg: 26px;
+      --radius-full: 9999px;
+      --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    [data-theme="light"] {
+      --bg-gradient: linear-gradient(180deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%);
+      --bg-color: #f8fafc;
+      --card-bg: #ffffff;
+      --card-border: rgba(203, 213, 225, 0.8);
+      --input-bg: #f1f5f9;
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --primary: #0284c7;
+      --primary-gradient: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
+      --shadow-lg: 0 12px 32px rgba(15, 23, 42, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+
+    body {
+      background: var(--bg-gradient);
+      background-attachment: fixed;
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-bottom: 110px;
+      overflow-x: hidden;
+    }
+
+    .app-container {
+      width: 100%;
+      max-width: 520px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      background: var(--card-bg);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-logo {
+      width: 38px;
+      height: 38px;
+      background: var(--primary-gradient);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      color: #fff;
+      font-size: 1.2rem;
+      box-shadow: 0 4px 12px rgba(56, 189, 248, 0.3);
+    }
+
+    .brand-title h1 {
+      font-size: 1rem;
+      font-weight: 800;
+    }
+
+    .brand-title p {
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .cart-badge-btn {
+      position: relative;
+      width: 42px;
+      height: 42px;
+      border-radius: var(--radius-full);
+      background: var(--input-bg);
+      border: 1.5px solid var(--card-border);
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.2rem;
+    }
+
+    .cart-count {
+      position: absolute;
+      top: -4px;
+      right: -4px;
+      background: var(--accent-amber-gradient);
+      color: #000;
+      font-size: 0.72rem;
+      font-weight: 800;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .wizard-progress-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .progress-top-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .progress-step-title {
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: var(--primary);
+      text-transform: uppercase;
+    }
+
+    .progress-step-counter {
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: var(--text-muted);
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 6px;
+      background: rgba(148, 163, 184, 0.2);
+      border-radius: var(--radius-full);
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--primary-gradient);
+      border-radius: var(--radius-full);
+      transition: width 0.3s ease;
+    }
+
+    .scene {
+      display: none;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .scene.active {
+      display: flex;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      box-shadow: var(--shadow-lg);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .card-title {
+      font-size: 0.82rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .live-badge {
+      font-size: 0.7rem;
+      padding: 3px 10px;
+      border-radius: var(--radius-full);
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--primary);
+      font-weight: 800;
+    }
+
+    .btn-touch-large {
+      min-height: 52px;
+      padding: 10px;
+      border-radius: var(--radius-md);
+      background: var(--input-bg);
+      border: 1.5px solid var(--card-border);
+      color: var(--text-main);
+      font-size: 0.92rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: var(--transition);
+    }
+
+    .btn-touch-large.active {
+      background: var(--primary-gradient);
+      color: #ffffff;
+      border-color: transparent;
+      box-shadow: 0 6px 16px rgba(56, 189, 248, 0.4);
+    }
+
+    .grade-tile-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .grade-tile-btn {
+      min-height: 72px;
+      padding: 10px;
+      border-radius: var(--radius-md);
+      background: var(--input-bg);
+      border: 1.5px solid var(--card-border);
+      color: var(--text-main);
+      font-size: 1.1rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+    }
+
+    .grade-tile-btn.active {
+      background: var(--primary-gradient);
+      color: #ffffff;
+      border-color: transparent;
+    }
+
+    .size-chips-wrapper {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .chip-btn {
+      min-height: 56px;
+      border-radius: var(--radius-md);
+      background: var(--input-bg);
+      border: 1.5px solid var(--card-border);
+      color: var(--text-main);
+      font-size: 1.3rem;
+      font-weight: 800;
+      font-family: 'JetBrains Mono', monospace;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .chip-btn.active {
+      background: var(--primary-gradient);
+      color: #ffffff;
+      border-color: transparent;
+    }
+
+    .keypad-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .btn-keypad {
+      min-height: 54px;
+      border-radius: var(--radius-md);
+      background: var(--input-bg);
+      border: 1.5px solid var(--card-border);
+      color: var(--text-main);
+      font-size: 1.4rem;
+      font-weight: 800;
+      font-family: 'JetBrains Mono', monospace;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .input-card-box {
+      background: var(--input-bg);
+      border: 2px solid var(--card-border);
+      border-radius: var(--radius-md);
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      cursor: pointer;
+    }
+
+    .input-card-box.active {
+      border-color: var(--primary);
+      background: rgba(56, 189, 248, 0.1);
+    }
+
+    .input-card-lbl {
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    .input-card-val {
+      font-size: 1.4rem;
+      font-weight: 800;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--primary);
+    }
+
+    .ecco-quote-container {
+      background: #ffffff !important;
+      color: #000000 !important;
+      border: 2.5px solid #000000;
+      border-radius: var(--radius-sm);
+      padding: 16px;
+      font-family: Arial, Helvetica, sans-serif !important;
+      overflow-x: auto;
+    }
+
+    .ecco-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.8rem;
+      color: #000;
+      text-align: center;
+    }
+
+    .ecco-table th, .ecco-table td {
+      border: 1.5px solid #000000;
+      padding: 6px 8px;
+    }
+
+    .ecco-table th {
+      background-color: #ffffff;
+      font-weight: 800;
+    }
+
+    .ecco-table .item-row td {
+      background-color: #fff0f5;
+      font-weight: 600;
+    }
+
+    .ecco-table .total-row td {
+      background-color: #e0ffff;
+      font-weight: 800;
+    }
+
+    .sticky-bottom-dock {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(11, 19, 41, 0.95);
+      backdrop-filter: blur(20px);
+      border-top: 1.5px solid var(--card-border);
+      padding: 12px 14px;
+      display: flex;
+      justify-content: center;
+      z-index: 99;
+    }
+
+    .dock-container {
+      width: 100%;
+      max-width: 520px;
+      display: flex;
+      gap: 10px;
+    }
+
+    .dock-btn {
+      min-height: 52px;
+      border-radius: var(--radius-md);
+      border: none;
+      font-size: 0.95rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn-dock-back {
+      flex: 1;
+      background: var(--input-bg);
+      border: 1.5px solid var(--card-border);
+      color: var(--text-main);
+    }
+
+    .btn-dock-next {
+      flex: 2;
+      background: var(--primary-gradient);
+      color: #ffffff;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="app-container">
+
+    <header>
+      <div class="brand">
+        <div class="brand-logo">E</div>
+        <div class="brand-title">
+          <h1>ECCO Steel</h1>
+          <p>Official ECCO Steel Quotation Generator</p>
+        </div>
+      </div>
+      <div style="display: flex; gap: 8px; align-items: center;">
+        <button class="cart-badge-btn" onclick="goToStep(7)">
+          🛒
+          <span class="cart-count" id="cart-count-badge">0</span>
+        </button>
+        <button class="cart-badge-btn" onclick="toggleTheme()" title="Toggle Theme">
+          🌓
+        </button>
+      </div>
+    </header>
+
+    <div class="wizard-progress-card">
+      <div class="progress-top-info">
+        <span class="progress-step-title" id="wiz-progress-title">Step 1: Choose Grade</span>
+        <span class="progress-step-counter" id="wiz-progress-counter">Step 1 of 6</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="wiz-progress-fill" style="width: 16.6%;"></div>
+      </div>
+    </div>
+
+    <!-- SCENE 1 -->
+    <div class="scene active" id="scene-1">
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">1. Choose Mesh Grade</span>
+          <span class="live-badge">Step 1</span>
+        </div>
+        <div class="grade-tile-grid">
+          <button class="grade-tile-btn active" id="btn-grade-A" onclick="selectGrade('A')">Grade A<br><small>Square Mesh</small></button>
+          <button class="grade-tile-btn" id="btn-grade-B" onclick="selectGrade('B')">Grade B<br><small>Rectangular</small></button>
+          <button class="grade-tile-btn" id="btn-grade-DA" onclick="selectGrade('DA')">Grade DA<br><small>Small Square</small></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCENE 2 -->
+    <div class="scene" id="scene-2">
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">2. Select Mesh Size</span>
+          <span class="live-badge" id="badge-scene2">Grade A</span>
+        </div>
+        <div class="size-chips-wrapper">
+          <button class="chip-btn active" onclick="selectSize(5)">A5</button>
+          <button class="chip-btn" onclick="selectSize(6)">A6</button>
+          <button class="chip-btn" onclick="selectSize(7)">A7</button>
+          <button class="chip-btn" onclick="selectSize(8)">A8</button>
+          <button class="chip-btn" onclick="selectSize(9)">A9</button>
+          <button class="chip-btn" onclick="selectSize(10)">A10</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCENE 3 -->
+    <div class="scene" id="scene-3">
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">3. Sheet Dimensions (L × W)</span>
+          <span class="live-badge" id="badge-scene3">A5</span>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+          <button class="btn-touch-large active" id="btn-dim-std" onclick="setDimMode(false)">6.0m × 2.2m (Std)</button>
+          <button class="btn-touch-large" id="btn-dim-custom" onclick="setDimMode(true)">Custom Dim</button>
+        </div>
+
+        <div id="custom-dim-box" style="display: none; flex-direction: column; gap: 10px;">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+            <div class="input-card-box active" id="box-len" onclick="setActiveDimField('len')">
+              <span class="input-card-lbl">Length (m)</span>
+              <span class="input-card-val" id="val-len-display">6.0m</span>
+            </div>
+            <div class="input-card-box" id="box-wid" onclick="setActiveDimField('wid')">
+              <span class="input-card-lbl">Width (m)</span>
+              <span class="input-card-val" id="val-wid-display">2.2m</span>
+            </div>
+          </div>
+          <div class="keypad-grid">
+            <button class="btn-keypad" onclick="pressDimKey('1')">1</button>
+            <button class="btn-keypad" onclick="pressDimKey('2')">2</button>
+            <button class="btn-keypad" onclick="pressDimKey('3')">3</button>
+            <button class="btn-keypad" onclick="pressDimKey('4')">4</button>
+            <button class="btn-keypad" onclick="pressDimKey('5')">5</button>
+            <button class="btn-keypad" onclick="pressDimKey('6')">6</button>
+            <button class="btn-keypad" onclick="pressDimKey('7')">7</button>
+            <button class="btn-keypad" onclick="pressDimKey('8')">8</button>
+            <button class="btn-keypad" onclick="pressDimKey('9')">9</button>
+            <button class="btn-keypad" onclick="pressDimKey('.')">.</button>
+            <button class="btn-keypad" onclick="pressDimKey('0')">0</button>
+            <button class="btn-keypad" onclick="pressDimKey('back')">⌫</button>
+          </div>
+        </div>
+
+        <div style="background: var(--input-bg); padding: 12px; border-radius: var(--radius-md); border: 1px solid var(--card-border);">
+          <div style="display: flex; justify-content: space-between; font-size: 0.85rem;">
+            <span>Calculated Sheet Area:</span>
+            <strong id="scene3-area-val">13.20 m²</strong>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 0.95rem; margin-top: 6px; color: var(--primary);">
+            <span>Base Unit Price:</span>
+            <strong id="scene3-base-val">RM 153.12</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCENE 4 -->
+    <div class="scene" id="scene-4">
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">4. Sequential Dual Discounts</span>
+          <span class="live-badge" id="badge-scene4">Base: RM 153.12</span>
+        </div>
+        <div style="display: flex; gap: 10px;">
+          <div class="input-card-box active" id="box-disc1" onclick="setActiveDiscField('disc1')" style="flex: 1;">
+            <span class="input-card-lbl">1st Discount</span>
+            <span class="input-card-val" id="val-disc1-display">0 %</span>
+          </div>
+          <div class="input-card-box" id="box-disc2" onclick="setActiveDiscField('disc2')" style="flex: 1;">
+            <span class="input-card-lbl">2nd Discount</span>
+            <span class="input-card-val" id="val-disc2-display">0 %</span>
+          </div>
+        </div>
+        <div class="keypad-grid">
+          <button class="btn-keypad" onclick="pressDiscKey('1')">1</button>
+          <button class="btn-keypad" onclick="pressDiscKey('2')">2</button>
+          <button class="btn-keypad" onclick="pressDiscKey('3')">3</button>
+          <button class="btn-keypad" onclick="pressDiscKey('4')">4</button>
+          <button class="btn-keypad" onclick="pressDiscKey('5')">5</button>
+          <button class="btn-keypad" onclick="pressDiscKey('6')">6</button>
+          <button class="btn-keypad" onclick="pressDiscKey('7')">7</button>
+          <button class="btn-keypad" onclick="pressDiscKey('8')">8</button>
+          <button class="btn-keypad" onclick="pressDiscKey('9')">9</button>
+          <button class="btn-keypad" onclick="pressDiscKey('.')">.</button>
+          <button class="btn-keypad" onclick="pressDiscKey('0')">0</button>
+          <button class="btn-keypad" onclick="pressDiscKey('back')">⌫</button>
+        </div>
+        <div style="background: var(--input-bg); padding: 12px; border-radius: var(--radius-md); border: 1px solid var(--card-border); text-align: center;">
+          <span style="font-size: 0.8rem; color: var(--text-muted);">FINAL UNIT NET PRICE</span>
+          <h2 id="scene4-net-val" style="color: var(--primary); margin-top: 4px;">RM 153.12</h2>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCENE 5 -->
+    <div class="scene" id="scene-5">
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">5. Order Quantity</span>
+          <span class="live-badge" id="badge-scene5">RM 153.12 / pc</span>
+        </div>
+        <div class="input-card-box active">
+          <span class="input-card-lbl">Order Quantity (Sheets)</span>
+          <span class="input-card-val" id="val-qty-display" style="color: var(--accent-amber); font-size: 1.6rem;">1 SHEETS</span>
+        </div>
+        <div class="keypad-grid">
+          <button class="btn-keypad" onclick="pressQtyKey('1')">1</button>
+          <button class="btn-keypad" onclick="pressQtyKey('2')">2</button>
+          <button class="btn-keypad" onclick="pressQtyKey('3')">3</button>
+          <button class="btn-keypad" onclick="pressQtyKey('4')">4</button>
+          <button class="btn-keypad" onclick="pressQtyKey('5')">5</button>
+          <button class="btn-keypad" onclick="pressQtyKey('6')">6</button>
+          <button class="btn-keypad" onclick="pressQtyKey('7')">7</button>
+          <button class="btn-keypad" onclick="pressQtyKey('8')">8</button>
+          <button class="btn-keypad" onclick="pressQtyKey('9')">9</button>
+          <button class="btn-keypad" onclick="pressQtyKey('00')">00</button>
+          <button class="btn-keypad" onclick="pressQtyKey('0')">0</button>
+          <button class="btn-keypad" onclick="pressQtyKey('back')">⌫</button>
+        </div>
+        <div style="background: var(--input-bg); padding: 12px; border-radius: var(--radius-md); border: 1px solid var(--card-border); text-align: center;">
+          <span style="font-size: 0.8rem; color: var(--text-muted);">ITEM TOTAL PRICE</span>
+          <h2 id="scene5-total-val" style="color: var(--accent-amber); margin-top: 4px;">RM 153.12</h2>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCENE 6 -->
+    <div class="scene" id="scene-6">
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">6. Quotation Remarks & Terms</span>
+          <span class="live-badge">Header & Footer</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 6px;">
+          <span style="font-size: 0.78rem; font-weight: 800; color: var(--text-muted);">SALES PERSON NAME</span>
+          <input type="text" id="salesperson-input" placeholder="e.g. Chong / Alex" style="padding: 12px; border-radius: var(--radius-md); background: var(--input-bg); border: 1.5px solid var(--card-border); color: var(--text-main); font-size: 1rem; font-weight: 700; outline: none;" oninput="updateQuotationTable()">
+        </div>
+        <div style="display: flex; justify-content: space-between; padding: 10px; background: var(--input-bg); border-radius: var(--radius-md); border: 1px solid var(--card-border);">
+          <span style="font-size: 0.85rem; font-weight: 800;">Brand:</span>
+          <span style="font-size: 0.95rem; font-weight: 800; color: var(--primary);">ECCO (Fixed)</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 6px;">
+          <span style="font-size: 0.78rem; font-weight: 800; color: var(--text-muted);">PAYMENT TERM</span>
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;">
+            <button class="btn-touch-large active" id="term-cbd" onclick="setPaymentTerm('CBD')">CBD</button>
+            <button class="btn-touch-large" id="term-cod" onclick="setPaymentTerm('COD')">COD</button>
+            <button class="btn-touch-large" id="term-na" onclick="setPaymentTerm('-N/A-')">-N/A-</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SUMMARY SCENE (SCENE 7) -->
+    <div class="scene" id="scene-7">
+      <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+        <button class="btn-touch-large" style="flex: 1; background: var(--primary-gradient); color: #fff;" onclick="copyText()">📋 Copy Text</button>
+        <button class="btn-touch-large" style="flex: 1; background: var(--accent-amber-gradient); color: #000;" onclick="addItemToCart(); goToStep(1);">➕ Add Item</button>
+        <button class="btn-touch-large" style="background: rgba(244, 63, 94, 0.15); color: var(--accent-red);" onclick="clearCart()">🗑️ Clear</button>
+      </div>
+
+      <!-- OFFICIAL ECCO TABLE -->
+      <div class="ecco-quote-container">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <img src="ecco_logo.png" alt="ECCO STEEL" style="height: 38px; object-fit: contain;">
+          </div>
+        </div>
+        <div style="display: flex; justify-content: space-between; font-size: 0.76rem; color: #000; border-top: 1px solid #ccc; border-bottom: 1px solid #ccc; padding: 4px 0; margin-bottom: 10px;">
+          <span>date: <strong id="quote-date">-</strong></span>
+          <span>sales person: <strong id="quote-salesperson">-</strong></span>
+        </div>
+
+        <table class="ecco-table">
+          <thead>
+            <tr>
+              <th>Fabric Reference No</th>
+              <th>MS145: 2014</th>
+              <th>List Price (RM) per Sq. m</th>
+              <th>kg/m²</th>
+              <th>Qty - PCS</th>
+              <th>Unit Price (RM/PC)</th>
+              <th>Total (RM)</th>
+            </tr>
+          </thead>
+          <tbody id="table-body">
+          </tbody>
+          <tfoot>
+            <tr class="total-row">
+              <td colspan="6" style="text-align: right; font-weight: 800;">Total</td>
+              <td id="grand-total-val" style="font-weight: 800;">0.00</td>
+            </tr>
+          </tfoot>
+        </table>
+
+        <div style="margin-top: 12px; font-size: 0.82rem; line-height: 1.5; color: #000;">
+          <p><strong>Brand:</strong> ECCO</p>
+          <p><strong>Term:</strong> <span id="quote-term">CBD</span></p>
+          <p><strong>Validity:</strong> <span id="quote-validity">1 day</span>, subjected to our final confirmation</p>
+        </div>
+      </div>
+
+      <!-- FLEET LOGISTICS -->
+      <div class="card" style="border-color: rgba(245, 158, 11, 0.4);">
+        <div class="card-header">
+          <span class="card-title" style="color: var(--accent-amber);">Combined Transport Fleet Requirement</span>
+          <span class="live-badge" style="background: rgba(245, 158, 11, 0.2); color: var(--accent-amber);">Fleet</span>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+          <div style="background: var(--input-bg); border: 1px solid var(--card-border); padding: 12px; border-radius: var(--radius-md);">
+            <div style="display: flex; justify-content: space-between; font-size: 0.8rem; font-weight: 800;">
+              <span>🚚 20FT Lorry</span>
+              <span id="lorry-20ft-qty" style="color: var(--primary); font-size: 1.2rem;">1</span>
+            </div>
+            <span style="font-size: 0.68rem; color: var(--text-muted);">Max 11T / lorry</span>
+          </div>
+          <div style="background: var(--input-bg); border: 1px solid var(--card-border); padding: 12px; border-radius: var(--radius-md);">
+            <div style="display: flex; justify-content: space-between; font-size: 0.8rem; font-weight: 800;">
+              <span>🚛 40FT Trailer</span>
+              <span id="lorry-40ft-qty" style="color: var(--primary); font-size: 1.2rem;">1</span>
+            </div>
+            <span style="font-size: 0.68rem; color: var(--text-muted);">Max 25T / lorry</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- STICKY BOTTOM DOCK -->
+  <div class="sticky-bottom-dock" id="bottom-dock">
+    <div class="dock-container">
+      <button class="dock-btn btn-dock-back" id="btn-back" onclick="prevStep()" style="display: none;">Back</button>
+      <button class="dock-btn btn-dock-next" id="btn-next" onclick="nextStep()">Next Step</button>
+    </div>
+  </div>
+
+  <script>
+    const weightMatrix = {
+      'A5': 1.54, 'A6': 2.22, 'A7': 3.02, 'A8': 3.95, 'A9': 5.00, 'A10': 6.17,
+      'B5': 2.22, 'B6': 3.20, 'B7': 4.35, 'B8': 5.68, 'B9': 7.20, 'B10': 8.88,
+      'DA5': 3.08, 'DA6': 4.44, 'DA7': 6.04, 'DA8': 7.90, 'DA9': 10.00, 'DA10': 12.34
+    };
+
+    const rateMatrix = {
+      'A5': 11.60, 'A6': 16.70, 'A7': 22.70, 'A8': 29.70, 'A9': 37.60, 'A10': 46.40,
+      'B5': 16.70, 'B6': 24.10, 'B7': 32.70, 'B8': 42.70, 'B9': 54.10, 'B10': 66.70,
+      'DA5': 23.20, 'DA6': 33.40, 'DA7': 45.40, 'DA8': 59.40, 'DA9': 75.20, 'DA10': 92.80
+    };
+
+    let currentStep = 1;
+    let selectedGrade = 'A';
+    let selectedSize = 5;
+    let isCustomDim = false;
+    let lenStr = '6.0';
+    let widStr = '2.2';
+    let activeDimField = 'len';
+    let disc1Str = '0';
+    let disc2Str = '0';
+    let activeDiscField = 'disc1';
+    let qtyStr = '1';
+    let paymentTerm = 'CBD';
+    let validityDays = 1;
+    let cartItems = [];
+    let isDark = true;
+
+    function toggleTheme() {
+      isDark = !isDark;
+      document.body.setAttribute('data-theme', isDark ? 'dark' : 'light');
+    }
+
+    function selectGrade(g) {
+      selectedGrade = g;
+      document.getElementById('btn-grade-A').classList.toggle('active', g === 'A');
+      document.getElementById('btn-grade-B').classList.toggle('active', g === 'B');
+      document.getElementById('btn-grade-DA').classList.toggle('active', g === 'DA');
+      updateCalculations();
+    }
+
+    function selectSize(s) {
+      selectedSize = s;
+      updateCalculations();
+    }
+
+    function setDimMode(custom) {
+      isCustomDim = custom;
+      document.getElementById('btn-dim-std').classList.toggle('active', !custom);
+      document.getElementById('btn-dim-custom').classList.toggle('active', custom);
+      document.getElementById('custom-dim-box').style.display = custom ? 'flex' : 'none';
+      if (!custom) {
+        lenStr = '6.0';
+        widStr = '2.2';
+      } else {
+        lenStr = '0';
+        widStr = '0';
+      }
+      updateCalculations();
+    }
+
+    function setActiveDimField(f) {
+      activeDimField = f;
+      document.getElementById('box-len').classList.toggle('active', f === 'len');
+      document.getElementById('box-wid').classList.toggle('active', f === 'wid');
+    }
+
+    function pressDimKey(k) {
+      let cur = activeDimField === 'len' ? lenStr : widStr;
+      if (k === 'back') {
+        cur = cur.length > 1 ? cur.slice(0, -1) : '0';
+      } else if (k === '.') {
+        if (!cur.includes('.')) cur += '.';
+      } else {
+        cur = cur === '0' ? k : cur + k;
+      }
+      if (activeDimField === 'len') lenStr = cur; else widStr = cur;
+      document.getElementById('val-len-display').innerText = lenStr + 'm';
+      document.getElementById('val-wid-display').innerText = widStr + 'm';
+      updateCalculations();
+    }
+
+    function setActiveDiscField(f) {
+      activeDiscField = f;
+      document.getElementById('box-disc1').classList.toggle('active', f === 'disc1');
+      document.getElementById('box-disc2').classList.toggle('active', f === 'disc2');
+    }
+
+    function pressDiscKey(k) {
+      let cur = activeDiscField === 'disc1' ? disc1Str : disc2Str;
+      if (k === 'back') {
+        cur = cur.length > 1 ? cur.slice(0, -1) : '0';
+      } else if (k === '.') {
+        if (!cur.includes('.')) cur += '.';
+      } else {
+        cur = cur === '0' ? k : cur + k;
+      }
+      if (activeDiscField === 'disc1') disc1Str = cur; else disc2Str = cur;
+      document.getElementById('val-disc1-display').innerText = disc1Str + ' %';
+      document.getElementById('val-disc2-display').innerText = disc2Str + ' %';
+      updateCalculations();
+    }
+
+    function pressQtyKey(k) {
+      if (k === 'back') {
+        qtyStr = qtyStr.length > 1 ? qtyStr.slice(0, -1) : '0';
+      } else if (k === '00') {
+        if (qtyStr !== '0') qtyStr += '00';
+      } else {
+        qtyStr = qtyStr === '0' ? k : qtyStr + k;
+      }
+      document.getElementById('val-qty-display').innerText = qtyStr + ' SHEETS';
+      updateCalculations();
+    }
+
+    function setPaymentTerm(t) {
+      paymentTerm = t;
+      document.getElementById('term-cbd').classList.toggle('active', t === 'CBD');
+      document.getElementById('term-cod').classList.toggle('active', t === 'COD');
+      document.getElementById('term-na').classList.toggle('active', t === '-N/A-');
+      updateQuotationTable();
+    }
+
+    function updateCalculations() {
+      const key = selectedGrade + selectedSize;
+      const rate = rateMatrix[key] || 11.60;
+      const weight = weightMatrix[key] || 1.54;
+      const l = parseFloat(lenStr) || 6.0;
+      const w = parseFloat(widStr) || 2.2;
+      const area = l * w;
+      const base = rate * area;
+      const d1 = parseFloat(disc1Str) || 0.0;
+      const d2 = parseFloat(disc2Str) || 0.0;
+      const net = base * (1 - d1 / 100) * (1 - d2 / 100);
+      const qty = parseInt(qtyStr) || 1;
+      const total = net * qty;
+
+      document.getElementById('badge-scene2').innerText = 'Grade ' + selectedGrade;
+      document.getElementById('badge-scene3').innerText = key;
+      document.getElementById('badge-scene4').innerText = 'Base: RM ' + base.toFixed(2);
+      document.getElementById('badge-scene5').innerText = 'RM ' + net.toFixed(2) + ' / pc';
+
+      document.getElementById('scene3-area-val').innerText = area.toFixed(2) + ' m²';
+      document.getElementById('scene3-base-val').innerText = 'RM ' + base.toFixed(2);
+      document.getElementById('scene4-net-val').innerText = 'RM ' + net.toFixed(2);
+      document.getElementById('scene5-total-val').innerText = 'RM ' + total.toFixed(2);
+
+      updateQuotationTable();
+    }
+
+    function addItemToCart() {
+      const key = selectedGrade + selectedSize;
+      const rate = rateMatrix[key] || 11.60;
+      const weight = weightMatrix[key] || 1.54;
+      const l = parseFloat(lenStr) || 6.0;
+      const w = parseFloat(widStr) || 2.2;
+      const area = l * w;
+      const base = rate * area;
+      const d1 = parseFloat(disc1Str) || 0.0;
+      const d2 = parseFloat(disc2Str) || 0.0;
+      const net = base * (1 - d1 / 100) * (1 - d2 / 100);
+      const qty = parseInt(qtyStr) || 1;
+      const total = net * qty;
+
+      cartItems.push({
+        ref: key,
+        l: l,
+        w: w,
+        rate: rate,
+        weight: weight,
+        qty: qty,
+        net: net,
+        total: total,
+        totalWeightKg: weight * area * qty
+      });
+
+      document.getElementById('cart-count-badge').innerText = cartItems.length;
+      disc1Str = '0';
+      disc2Str = '0';
+      qtyStr = '1';
+      document.getElementById('val-disc1-display').innerText = '0 %';
+      document.getElementById('val-disc2-display').innerText = '0 %';
+      document.getElementById('val-qty-display').innerText = '1 SHEETS';
+      updateCalculations();
+    }
+
+    function clearCart() {
+      cartItems = [];
+      document.getElementById('cart-count-badge').innerText = '0';
+      updateQuotationTable();
+    }
+
+    function updateQuotationTable() {
+      const today = new Date().toLocaleDateString('en-GB');
+      document.getElementById('quote-date').innerText = today;
+      document.getElementById('quote-salesperson').innerText = document.getElementById('salesperson-input').value || '-';
+      document.getElementById('quote-term').innerText = paymentTerm;
+
+      const tbody = document.getElementById('table-body');
+      tbody.innerHTML = '';
+
+      let items = cartItems.length > 0 ? cartItems : [{
+        ref: selectedGrade + selectedSize,
+        l: parseFloat(lenStr) || 6.0,
+        w: parseFloat(widStr) || 2.2,
+        rate: rateMatrix[selectedGrade + selectedSize] || 11.60,
+        weight: weightMatrix[selectedGrade + selectedSize] || 1.54,
+        qty: parseInt(qtyStr) || 1,
+        net: parseFloat((document.getElementById('scene4-net-val').innerText).replace('RM ', '')) || 0,
+        total: parseFloat((document.getElementById('scene5-total-val').innerText).replace('RM ', '')) || 0,
+        totalWeightKg: (weightMatrix[selectedGrade + selectedSize] || 1.54) * (parseFloat(lenStr) || 6.0) * (parseFloat(widStr) || 2.2) * (parseInt(qtyStr) || 1)
+      }];
+
+      let grandTotal = 0;
+      let grandWeightKg = 0;
+
+      items.forEach((it, idx) => {
+        grandTotal += it.total;
+        grandWeightKg += it.totalWeightKg;
+
+        const tr = document.createElement('tr');
+        tr.className = 'item-row';
+        tr.innerHTML = `
+          <td>${it.ref}<br>(${it.l}m x ${it.w}m)</td>
+          <td>Standard</td>
+          <td>${it.rate.toFixed(2)}</td>
+          <td>${it.weight.toFixed(2)}</td>
+          <td>${it.qty}</td>
+          <td><input type="number" step="0.01" value="${it.net.toFixed(2)}" style="width: 80px; text-align: center; font-weight: bold; border: 1px solid #ccc; border-radius: 4px; padding: 2px;" oninput="updateRowUnitPrice(${idx}, this.value)"></td>
+          <td><strong id="row-total-${idx}">${it.total.toFixed(2)}</strong></td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      document.getElementById('grand-total-val').innerText = grandTotal.toFixed(2);
+
+      const tonnes = grandWeightKg / 1000.0;
+      document.getElementById('lorry-20ft-qty').innerText = Math.max(1, Math.ceil(tonnes / 11.0));
+      document.getElementById('lorry-40ft-qty').innerText = Math.max(1, Math.ceil(tonnes / 25.0));
+    }
+
+    function updateRowUnitPrice(idx, val) {
+      const newNet = parseFloat(val) || 0;
+      let items = cartItems.length > 0 ? cartItems : null;
+      if (items && items[idx]) {
+        items[idx].net = newNet;
+        items[idx].total = newNet * items[idx].qty;
+        document.getElementById('row-total-' + idx).innerText = items[idx].total.toFixed(2);
+      } else {
+        const qty = parseInt(qtyStr) || 1;
+        const newTotal = newNet * qty;
+        document.getElementById('scene4-net-val').innerText = 'RM ' + newNet.toFixed(2);
+        document.getElementById('scene5-total-val').innerText = 'RM ' + newTotal.toFixed(2);
+        document.getElementById('row-total-0').innerText = newTotal.toFixed(2);
+      }
+      
+      // Recalculate Grand Total
+      let sum = 0;
+      const totalEls = document.querySelectorAll('[id^="row-total-"]');
+      totalEls.forEach(el => sum += parseFloat(el.innerText) || 0);
+      document.getElementById('grand-total-val').innerText = sum.toFixed(2);
+    }
+
+    function goToStep(s) {
+      currentStep = s;
+      for (let i = 1; i <= 7; i++) {
+        document.getElementById('scene-' + i).classList.toggle('active', i === s);
+      }
+      document.getElementById('wiz-progress-title').innerText = s === 7 ? 'Official Summary' : 'Step ' + s + ' of 6';
+      document.getElementById('wiz-progress-counter').innerText = s === 7 ? 'Summary' : 'Step ' + s + ' of 6';
+      document.getElementById('wiz-progress-fill').style.width = s === 7 ? '100%' : (s / 6 * 100) + '%';
+
+      document.getElementById('btn-back').style.display = s > 1 ? 'block' : 'none';
+      document.getElementById('btn-next').innerText = s === 6 ? '➕ Add to Quotation Table' : (s === 7 ? 'Back to Wizard' : 'Next Step');
+      document.getElementById('bottom-dock').style.display = s === 7 ? 'none' : 'flex';
+      updateCalculations();
+    }
+
+    function nextStep() {
+      if (currentStep < 6) {
+        goToStep(currentStep + 1);
+      } else if (currentStep === 6) {
+        addItemToCart();
+        goToStep(7);
+      }
+    }
+
+    function prevStep() {
+      if (currentStep > 1) goToStep(currentStep - 1);
+    }
+
+    function copyText() {
+      let text = "OFFICIAL ECCO STEEL QUOTATION\nDate: " + document.getElementById('quote-date').innerText + "\nGrand Total: RM " + document.getElementById('grand-total-val').innerText;
+      navigator.clipboard.writeText(text);
+      alert("Quotation text copied to clipboard!");
+    }
+
+    updateCalculations();
+  </script>
+</body>
+</html>
