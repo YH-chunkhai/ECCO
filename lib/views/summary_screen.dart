@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
+import 'package:gal/gal.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
@@ -119,7 +120,7 @@ class _SummaryScreenState extends State<SummaryScreen> {
 
       final timestamp = DateTime.now().millisecondsSinceEpoch;
       final fileName = 'ECCO_Quotation_Summary_$timestamp.png';
-      final quotationText = provider.generateQuotationText();
+      final quotationText = provider.generateMeshPriceText();
 
       XFile shareableFile;
       if (kIsWeb) {
@@ -207,7 +208,28 @@ class _SummaryScreenState extends State<SummaryScreen> {
       final timestamp = DateTime.now().millisecondsSinceEpoch;
       final fileName = 'ECCO_Quotation_$timestamp.png';
 
-      if (kIsWeb) {
+      if (!kIsWeb && (Platform.isAndroid || Platform.isIOS)) {
+        // Save directly to mobile phone's Photo Gallery (DCIM/Pictures)
+        await Gal.putImageBytes(pngBytes, name: fileName);
+
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Row(
+                children: [
+                  Icon(Icons.check_circle_rounded, color: Colors.white, size: 20),
+                  SizedBox(width: 10),
+                  Expanded(
+                    child: Text('Photo saved directly to your phone\'s Photo Gallery!'),
+                  ),
+                ],
+              ),
+              backgroundColor: AppTheme.accentEmerald,
+              duration: Duration(seconds: 4),
+            ),
+          );
+        }
+      } else if (kIsWeb) {
         // Web / PC browser download directly to PC Downloads folder
         final xfile = XFile.fromData(
           pngBytes,
@@ -386,7 +408,7 @@ class _SummaryScreenState extends State<SummaryScreen> {
                             Container(
                               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                               decoration: BoxDecoration(
-                                color: AppTheme.primary.withOpacity(0.15),
+                                color: AppTheme.primary.withValues(alpha: 0.15),
                                 borderRadius: BorderRadius.circular(8),
                               ),
                               child: Text(

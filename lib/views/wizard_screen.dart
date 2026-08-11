@@ -242,7 +242,6 @@ class WizardScreen extends StatelessWidget {
           final size = sizes[index];
           final isSelected = provider.selectedSize == size;
           final codeStr = '${provider.selectedGrade.code}$size';
-          final ms145Str = MeshCalculator.getMs145Code(provider.selectedGrade, size);
 
           return InkWell(
             onTap: () => provider.setSize(size),
