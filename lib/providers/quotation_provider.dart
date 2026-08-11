@@ -236,18 +236,24 @@ class QuotationProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  bool _hasConfiguredTerms = false;
+  bool get hasConfiguredTerms => _hasConfiguredTerms || _cartItems.isNotEmpty || _header.salesPerson.isNotEmpty;
+
   void setSalesPerson(String name) {
     _header.salesPerson = name;
+    _hasConfiguredTerms = true;
     notifyListeners();
   }
 
   void setPaymentTerm(PaymentTerm term) {
     _header.paymentTerm = term;
+    _hasConfiguredTerms = true;
     notifyListeners();
   }
 
   void setValidityDays(dynamic days) {
     _header.validityDays = days;
+    _hasConfiguredTerms = true;
     notifyListeners();
   }
 

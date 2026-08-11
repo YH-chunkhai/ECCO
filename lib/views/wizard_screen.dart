@@ -9,8 +9,28 @@ import '../theme/app_theme.dart';
 import '../widgets/custom_keypad.dart';
 import '../widgets/progress_header.dart';
 
-class WizardScreen extends StatelessWidget {
+class WizardScreen extends StatefulWidget {
   const WizardScreen({super.key});
+
+  @override
+  State<WizardScreen> createState() => _WizardScreenState();
+}
+
+class _WizardScreenState extends State<WizardScreen> {
+  late TextEditingController _salesPersonController;
+
+  @override
+  void initState() {
+    super.initState();
+    final provider = context.read<QuotationProvider>();
+    _salesPersonController = TextEditingController(text: provider.header.salesPerson);
+  }
+
+  @override
+  void dispose() {
+    _salesPersonController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -485,6 +505,10 @@ class WizardScreen extends StatelessWidget {
   // STEP 6: REMARKS & TERMS
   Widget _buildStep6Terms(
       BuildContext context, QuotationProvider provider, bool isDark) {
+    if (_salesPersonController.text != provider.header.salesPerson) {
+      _salesPersonController.text = provider.header.salesPerson;
+    }
+
     return _buildCardWrapper(
       title: '6. Quotation Remarks & Terms',
       badge: 'Header & Footer',
@@ -492,6 +516,32 @@ class WizardScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          if (provider.hasConfiguredTerms)
+            Container(
+              margin: const EdgeInsets.only(bottom: 14),
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+              decoration: BoxDecoration(
+                color: AppTheme.accentEmerald.withValues(alpha: 0.15),
+                borderRadius: BorderRadius.circular(14),
+                border: Border.all(color: AppTheme.accentEmerald.withValues(alpha: 0.4)),
+              ),
+              child: const Row(
+                children: [
+                  Icon(Icons.check_circle_rounded, color: AppTheme.accentEmerald, size: 18),
+                  SizedBox(width: 10),
+                  Expanded(
+                    child: Text(
+                      'Following your last modified quotation terms. Adjust below if needed.',
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w700,
+                        color: AppTheme.accentEmerald,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
           const Text(
             'Sales Person Name',
             style: TextStyle(
@@ -503,13 +553,9 @@ class WizardScreen extends StatelessWidget {
           ),
           const SizedBox(height: 6),
           TextField(
+            controller: _salesPersonController,
             onChanged: (val) => provider.setSalesPerson(val),
             decoration: InputDecoration(
-              hintText: 'e.g. Chong / Alex',
-              hintStyle: TextStyle(
-                color:
-                    isDark ? AppTheme.textDarkMuted : AppTheme.textLightMuted,
-              ),
               filled: true,
               fillColor: isDark ? AppTheme.inputDark : AppTheme.inputLight,
               border: OutlineInputBorder(
@@ -619,6 +665,7 @@ class WizardScreen extends StatelessWidget {
   Widget _buildStickyBottomDock(
       BuildContext context, QuotationProvider provider, bool isDark) {
     final step = provider.currentStep;
+    final showDirectAddOnStep5 = step == 5 && provider.hasConfiguredTerms;
 
     return Container(
       padding: const EdgeInsets.all(12),
@@ -656,50 +703,114 @@ class WizardScreen extends StatelessWidget {
               ),
             ),
           if (step > 1) const SizedBox(width: 10),
-          Expanded(
-            flex: 2,
-            child: Container(
-              height: 52,
-              decoration: BoxDecoration(
-                gradient: step == 6
-                    ? AppTheme.amberGradient
-                    : AppTheme.primaryGradient,
-                borderRadius: BorderRadius.circular(16),
-                boxShadow: const [
-                  BoxShadow(
-                    color: Color(0x330284C7),
-                    blurRadius: 12,
-                    offset: Offset(0, 4),
-                  ),
-                ],
-              ),
-              child: Material(
-                color: Colors.transparent,
-                child: InkWell(
-                  onTap: () {
-                    if (step < 6) {
-                      provider.nextStep();
-                    } else if (step == 6) {
+
+          if (showDirectAddOnStep5) ...[
+            Expanded(
+              flex: 2,
+              child: Container(
+                height: 52,
+                decoration: BoxDecoration(
+                  gradient: AppTheme.amberGradient,
+                  borderRadius: BorderRadius.circular(16),
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Color(0x33D97706),
+                      blurRadius: 12,
+                      offset: Offset(0, 4),
+                    ),
+                  ],
+                ),
+                child: Material(
+                  color: Colors.transparent,
+                  child: InkWell(
+                    onTap: () {
                       provider.addItemToCart();
                       provider.goToStep(7);
-                    }
-                  },
-                  borderRadius: BorderRadius.circular(16),
-                  child: Container(
-                    alignment: Alignment.center,
-                    child: Text(
-                      step == 6 ? '➕ Add to Quotation Table' : 'Next Step',
-                      style: TextStyle(
-                        color: step == 6 ? Colors.black : Colors.white,
-                        fontWeight: FontWeight.w900,
-                        fontSize: 15,
+                    },
+                    borderRadius: BorderRadius.circular(16),
+                    child: Container(
+                      alignment: Alignment.center,
+                      child: const Text(
+                        'Add to Quotation Table',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w900,
+                          fontSize: 14,
+                        ),
                       ),
                     ),
                   ),
                 ),
               ),
             ),
-          ),
+            const SizedBox(width: 8),
+            Expanded(
+              flex: 1,
+              child: ElevatedButton(
+                onPressed: () => provider.nextStep(),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor:
+                      isDark ? AppTheme.inputDark : AppTheme.inputLight,
+                  foregroundColor: isDark ? Colors.white : Colors.black,
+                  minimumSize: const Size.fromHeight(52),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                    side: BorderSide(
+                      color:
+                          isDark ? AppTheme.borderDark : AppTheme.borderLight,
+                    ),
+                  ),
+                ),
+                child: const Text('Step 6 ➔',
+                    style: TextStyle(fontSize: 12, fontWeight: FontWeight.w800)),
+              ),
+            ),
+          ] else ...[
+            Expanded(
+              flex: 2,
+              child: Container(
+                height: 52,
+                decoration: BoxDecoration(
+                  gradient: step == 6
+                      ? AppTheme.amberGradient
+                      : AppTheme.primaryGradient,
+                  borderRadius: BorderRadius.circular(16),
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Color(0x330284C7),
+                      blurRadius: 12,
+                      offset: Offset(0, 4),
+                    ),
+                  ],
+                ),
+                child: Material(
+                  color: Colors.transparent,
+                  child: InkWell(
+                    onTap: () {
+                      if (step < 6) {
+                        provider.nextStep();
+                      } else if (step == 6) {
+                        provider.addItemToCart();
+                        provider.goToStep(7);
+                      }
+                    },
+                    borderRadius: BorderRadius.circular(16),
+                    child: Container(
+                      alignment: Alignment.center,
+                      child: Text(
+                        step == 6 ? 'Add to Quotation Table' : 'Next Step',
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w900,
+                          fontSize: 15,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
         ],
       ),
     );
