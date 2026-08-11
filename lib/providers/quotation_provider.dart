@@ -352,26 +352,7 @@ class QuotationProvider extends ChangeNotifier {
   }
 
   String generateMeshPriceText() {
-    final buffer = StringBuffer();
-    final itemsList = cartItems;
-
-    if (itemsList.isEmpty) {
-      final ref = '${_selectedGrade.code}$_selectedSize';
-      final spec = MeshCalculator.getMs145Code(_selectedGrade, _selectedSize);
-      buffer.writeln('Fabric Ref: $ref ($spec)');
-      buffer.writeln('Qty: $currentQty PCS');
-      buffer.writeln('Mesh Price: RM ${currentTotalPrice.toStringAsFixed(2)}');
-    } else {
-      buffer.writeln('ECCO Steel Mesh Price Summary:');
-      for (int i = 0; i < itemsList.length; i++) {
-        final item = itemsList[i];
-        buffer.writeln('${i + 1}. Ref: ${item.fabricRefNo} (${item.ms145Code}) | ${item.quantity} PCS | Price: RM ${item.totalPrice.toStringAsFixed(2)}');
-      }
-      buffer.writeln('----------------------------------------');
-      buffer.writeln('GRAND TOTAL: RM ${grandTotal.toStringAsFixed(2)}');
-    }
-
-    return buffer.toString();
+    return 'ECCO Steel Mesh Price';
   }
 
   String generateWhatsAppText() {

@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "ecco_steel_quotation" "\0"
+            VALUE "FileDescription", "ECCO" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "ecco_steel_quotation" "\0"
+            VALUE "InternalName", "ECCO" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2026 com.example. All rights reserved." "\0"
             VALUE "OriginalFilename", "ecco_steel_quotation.exe" "\0"
-            VALUE "ProductName", "ecco_steel_quotation" "\0"
+            VALUE "ProductName", "ECCO" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

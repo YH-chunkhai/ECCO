@@ -23,7 +23,7 @@ class EccoSteelApp extends StatelessWidget {
     final provider = context.watch<QuotationProvider>();
 
     return MaterialApp(
-      title: 'ECCO Steel - Official Quotation Generator',
+      title: 'ECCO',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
