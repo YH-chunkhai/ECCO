@@ -40,7 +40,10 @@ jobs:
         run: flutter pub get
 
       - name: Build Flutter Web
-        run: flutter build web --release --base-href "/ECCO/"
+        run: |
+          flutter build web --release --base-href "/ECCO/"
+          cp ECCO.html build/web/ECCO.html
+          cp index.html build/web/standalone.html
 
       - name: Upload GitHub Pages artifact
         uses: actions/upload-pages-artifact@v3

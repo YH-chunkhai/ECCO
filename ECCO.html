@@ -1,0 +1,2022 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#0b1329">
+  <meta name="description" content="ECCO Steel Mesh Quotation System">
+  <title>ECCO Steel - Official ECCO Steel Quotation Generator</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700;800&display=swap"
+    rel="stylesheet">
+
+  <!-- html2canvas for PNG Export -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+  <!-- Inline Manifest Data URI -->
+  <link rel="manifest" id="manifest-placeholder">
+
+  <!-- Favicon / App Icon SVG -->
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='128' fill='%230f172a'/><path d='M120 120h272v272H120z' fill='none' stroke='%2338bdf8' stroke-width='32'/><path d='M120 256h272M256 120v272M120 188h272M120 324h272M188 120v272' stroke='%2338bdf8' stroke-width='16' opacity='0.7'/><circle cx='256' cy='256' r='40' fill='%23f59e0b'/></svg>">
+  <link rel="apple-touch-icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='128' fill='%230f172a'/><path d='M120 120h272v272H120z' fill='none' stroke='%2338bdf8' stroke-width='32'/><path d='M120 256h272M256 120v272M120 188h272M120 324h272M188 120v272' stroke='%2338bdf8' stroke-width='16' opacity='0.7'/><circle cx='256' cy='256' r='40' fill='%23f59e0b'/></svg>">
+
+  <style>
+    :root {
+      --bg-gradient: linear-gradient(180deg, #0b1329 0%, #111c3a 50%, #0b1329 100%);
+      --bg-color: #0b1329;
+      --card-bg: rgba(23, 33, 60, 0.85);
+      --card-border: rgba(255, 255, 255, 0.14);
+      --input-bg: rgba(11, 19, 41, 0.85);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-inverse: #0b1329;
+
+      --primary: #38bdf8;
+      --primary-gradient: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
+      --accent-amber: #f59e0b;
+      --accent-amber-gradient: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
+      --accent-emerald: #10b981;
+      --accent-emerald-gradient: linear-gradient(135deg, #34d399 0%, #059669 100%);
+      --accent-purple: #c084fc;
+      --accent-purple-gradient: linear-gradient(135deg, #c084fc 0%, #9333ea 100%);
+      --accent-red: #f43f5e;
+
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.25);
+      --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.45);
+      --radius-sm: 12px;
+      --radius-md: 18px;
+      --radius-lg: 26px;
+      --radius-full: 9999px;
+      --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    [data-theme="light"] {
+      --bg-gradient: linear-gradient(180deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%);
+      --bg-color: #f8fafc;
+      --card-bg: #ffffff;
+      --card-border: rgba(203, 213, 225, 0.8);
+      --input-bg: #f1f5f9;
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --primary: #0284c7;
+      --primary-gradient: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
+      --shadow-lg: 0 12px 32px rgba(15, 23, 42, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg-gradient);
+      background-attachment: fixed;
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-bottom: calc(105px + env(safe-area-inset-bottom));
+      overflow-x: hidden;
+    }
+
+    .app-container {
+      width: 100%;
+      max-width: 680px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 14px;
+      background: var(--card-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-sm);
+      position: sticky;
+      top: 10px;
+      z-index: 50;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-logo {
+      width: 36px;
+      height: 36px;
+      background: var(--primary-gradient);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(56, 189, 248, 0.3);
+    }
+
+    .brand-logo svg {
+      width: 20px;
+      height: 20px;
+      fill: #ffffff;
+    }
+
+    .brand-title h1 {
+      font-size: 1rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      color: var(--text-main);
+    }
+
+    .brand-title p {
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .cart-badge-btn {
+      position: relative;
+      width: 42px;
+      height: 42px;
+      border-radius: var(--radius-full);
+      background: var(--input-bg);
+      border: 1.5px solid var(--card-border);
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .cart-badge-btn:active {
+      transform: scale(0.9);
+      border-color: var(--primary);
+    }
+
+    .cart-count {
+      position: absolute;
+      top: -4px;
+      right: -4px;
+      background: var(--accent-amber-gradient);
+      color: #000;
+      font-size: 0.72rem;
+      font-weight: 800;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    }
+
+    .icon-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: var(--radius-full);
+      background: var(--input-bg);
+      border: 1.5px solid var(--card-border);
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .icon-btn:active {
+      transform: scale(0.9);
+    }
+
+    /* Cards */
+    .card {
+      background: var(--card-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      box-shadow: var(--shadow-lg);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      min-height: 24px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .card-title {
+      font-size: 0.88rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .live-badge {
+      font-size: 0.7rem;
+      padding: 3px 10px;
+      border-radius: var(--radius-full);
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--primary);
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    /* GRADE SELECTION TILES */
+    .grade-tile-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .grade-tile-btn {
+      min-height: 64px;
+      padding: 8px;
+      border-radius: var(--radius-md);
+      background: var(--input-bg);
+      border: 1.5px solid var(--card-border);
+      color: var(--text-main);
+      font-size: 1.15rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      text-align: center;
+      transition: var(--transition);
+      width: 100%;
+    }
+
+    .grade-tile-btn span.sub {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    .grade-tile-btn:active {
+      transform: scale(0.94);
+    }
+
+    .grade-tile-btn.active {
+      background: var(--primary-gradient);
+      color: #ffffff;
+      border-color: transparent;
+      box-shadow: 0 6px 18px rgba(56, 189, 248, 0.4);
+    }
+
+    /* INPUT FIELDS */
+    .input-box-wrapper {
+      background: var(--input-bg);
+      border: 1.5px solid var(--card-border);
+      border-radius: var(--radius-md);
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .input-box-wrapper.active-purple {
+      border-color: var(--accent-purple);
+      box-shadow: 0 0 14px rgba(192, 132, 252, 0.25);
+    }
+
+    .input-label {
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    .input-field-custom {
+      background: transparent;
+      border: none;
+      outline: none;
+      color: var(--primary);
+      font-size: 1.3rem;
+      font-weight: 800;
+      font-family: 'JetBrains Mono', monospace;
+      text-align: right;
+      width: 120px;
+    }
+
+    /* PRICING TABLE STYLING */
+    .price-catalog-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid var(--card-border);
+      background: var(--input-bg);
+    }
+
+    .price-catalog-table th {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-muted);
+      font-size: 0.74rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      padding: 10px 8px;
+      text-align: center;
+      border-bottom: 1.5px solid var(--card-border);
+    }
+
+    .price-catalog-table td {
+      padding: 8px 6px;
+      font-size: 0.88rem;
+      text-align: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      vertical-align: middle;
+    }
+
+    .price-catalog-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .disc-input-cell {
+      width: 68px;
+      padding: 4px 6px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      color: var(--accent-purple);
+      font-weight: 800;
+      font-size: 0.85rem;
+      text-align: center;
+      font-family: 'JetBrains Mono', monospace;
+      outline: none;
+    }
+
+    .disc-input-cell:focus {
+      border-color: var(--accent-purple);
+      box-shadow: 0 0 8px rgba(192, 132, 252, 0.4);
+    }
+
+    .net-input-cell {
+      width: 82px;
+      padding: 4px 6px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      color: var(--primary);
+      font-weight: 800;
+      font-size: 0.88rem;
+      text-align: center;
+      font-family: 'JetBrains Mono', monospace;
+      outline: none;
+    }
+
+    .net-input-cell:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 8px rgba(56, 189, 248, 0.4);
+    }
+
+    .qty-input-cell {
+      width: 60px;
+      padding: 4px 6px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      color: var(--accent-amber);
+      font-weight: 800;
+      font-size: 0.88rem;
+      text-align: center;
+      font-family: 'JetBrains Mono', monospace;
+      outline: none;
+    }
+
+    .qty-input-cell:focus {
+      border-color: var(--accent-amber);
+      box-shadow: 0 0 8px rgba(245, 158, 11, 0.4);
+    }
+
+    /* STANDARDIZED CURVED BUTTONS */
+    .btn-touch-large {
+      border-radius: var(--radius-full) !important;
+      border: 1px solid var(--card-border);
+      color: var(--text-main);
+      background: var(--input-bg);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+    }
+
+    .btn-touch-large:active {
+      transform: scale(0.94);
+    }
+
+    .btn-touch-large.active {
+      background: var(--primary-gradient) !important;
+      color: #ffffff !important;
+      border-color: transparent !important;
+      box-shadow: 0 4px 12px rgba(56, 189, 248, 0.4);
+    }
+    
+    .btn-add-row, .btn-delete-item {
+      border-radius: var(--radius-full) !important; 
+    }
+
+    .btn-add-row {
+      background: var(--accent-emerald-gradient);
+      color: #ffffff;
+      border: none;
+      padding: 4px 10px;
+      font-size: 0.76rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: var(--transition);
+      white-space: nowrap;
+    }
+
+    .btn-add-row:active {
+      transform: scale(0.92);
+    }
+
+    /* OFFICIAL ECCO STEEL QUOTATION TABLE STYLING */
+    .ecco-quote-container {
+      background: #ffffff !important;
+      color: #000000 !important;
+      border: 2.5px solid #000000;
+      border-radius: var(--radius-sm);
+      padding: 16px;
+      font-family: Arial, Helvetica, sans-serif !important;
+      box-shadow: var(--shadow-lg);
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      user-select: text !important;
+      -webkit-user-select: text !important;
+    }
+
+    .ecco-quote-container * {
+      user-select: text !important;
+      -webkit-user-select: text !important;
+      letter-spacing: normal !important;
+      word-spacing: normal !important;
+      font-family: Arial, Helvetica, sans-serif !important;
+    }
+
+    .ecco-table {
+      width: 100%;
+      margin: 0 !important; /* Locks table strictly to the left edge */
+      border-collapse: collapse;
+      font-size: 0.82rem;
+      color: #000;
+      font-family: Arial, Helvetica, sans-serif !important;
+      text-align: center;
+    }
+
+    .ecco-table th,
+    .ecco-table td {
+      border: 1.5px solid #000000;
+      padding: 7px 8px;
+      vertical-align: middle;
+    }
+
+    .ecco-table th {
+      background-color: #ffffff;
+      font-weight: 700;
+      color: #000000;
+      font-size: 0.8rem;
+      line-height: 1.35;
+    }
+
+    .ecco-table .subhead-row td {
+      background-color: #ffffff;
+      font-weight: 700;
+      text-align: left;
+      font-size: 0.84rem;
+      padding: 6px 10px;
+      line-height: 1.4;
+    }
+
+    .ecco-table .item-row td {
+      background-color: #fff0f5;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    .ecco-table .total-row td {
+      background-color: #e0ffff;
+      font-weight: 800;
+      font-size: 0.9rem;
+      padding: 8px 10px;
+    }
+
+    .ecco-terms-box {
+      margin-top: 14px;
+      margin-left: 0 !important; /* Removes any manual indenting */
+      padding-left: 0 !important;
+      font-size: 0.85rem;
+      line-height: 1.6;
+      color: #000000;
+      font-family: Arial, Helvetica, sans-serif !important;
+      text-align: left; /* Forces text to hug the left edge */
+      display: block;
+    }
+
+    .ecco-terms-box strong {
+      font-weight: 800;
+    }
+
+    .btn-delete-item {
+      background: rgba(244, 63, 94, 0.12);
+      border: 1px solid rgba(244, 63, 94, 0.35);
+      color: #f43f5e;
+      padding: 3px 8px;
+      cursor: pointer;
+      font-size: 0.8rem;
+      line-height: 1;
+      transition: all 0.15s ease;
+    }
+
+    .btn-delete-item:active {
+      transform: scale(0.9);
+      background: #f43f5e;
+      color: #ffffff;
+    }
+
+    .summary-floating-toolbar {
+      position: sticky;
+      top: 60px;
+      z-index: 15;
+      background: var(--card-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+      padding: 8px 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 8px;
+    }
+
+    /* Logistics & Lorry Capacity Alert Box */
+    .logistics-card {
+      border: 1.5px solid rgba(245, 158, 11, 0.4);
+    }
+
+    .lorry-capacity-alert {
+      padding: 12px 14px;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .lorry-capacity-alert.normal {
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+    }
+
+    .lorry-capacity-alert.reached {
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+    }
+
+    .lorry-capacity-alert.exceeded {
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid rgba(245, 158, 11, 0.5);
+    }
+
+    .fleet-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-sm);
+      background: var(--accent-amber-gradient);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .fleet-icon svg {
+      width: 20px;
+      height: 20px;
+      fill: #ffffff;
+    }
+
+    .fleet-details h4 {
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: var(--accent-amber);
+    }
+
+    .fleet-details p {
+      font-size: 0.75rem;
+      color: var(--text-main);
+      font-weight: 600;
+    }
+
+    .truck-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .truck-box {
+      background: var(--input-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .truck-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.78rem;
+      font-weight: 800;
+    }
+
+    .truck-qty {
+      font-size: 1.25rem;
+      font-weight: 800;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--primary);
+    }
+
+    .progress-bar-bg {
+      width: 100%;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius-full);
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: var(--primary-gradient);
+      border-radius: var(--radius-full);
+      transition: width 0.3s ease;
+    }
+
+    .truck-meta {
+      font-size: 0.68rem;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      font-weight: 600;
+    }
+
+    /* STICKY BOTTOM DOCK */
+    .sticky-bottom-dock {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(11, 19, 41, 0.95);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-top: 1.5px solid var(--card-border);
+      padding: 10px 14px;
+      padding-bottom: max(12px, env(safe-area-inset-bottom));
+      display: flex;
+      justify-content: center;
+      z-index: 99;
+      box-shadow: 0 -8px 28px rgba(0, 0, 0, 0.55);
+    }
+
+    [data-theme="light"] .sticky-bottom-dock {
+      background: rgba(255, 255, 255, 0.95) !important;
+    }
+
+    .dock-container {
+      width: 100%;
+      max-width: 680px;
+      display: flex;
+      gap: 10px;
+    }
+
+    .dock-btn {
+      min-height: 50px;
+      border-radius: var(--radius-md);
+      border: none;
+      font-size: 0.92rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: var(--transition);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .dock-btn:active {
+      transform: scale(0.94);
+    }
+
+    /* TOAST POSITIONED ABOVE STICKY DOCK */
+    .toast {
+      position: fixed;
+      bottom: calc(78px + env(safe-area-inset-bottom));
+      left: 50%;
+      transform: translateX(-50%) translateY(40px);
+      opacity: 0;
+      background: var(--accent-emerald-gradient);
+      color: #ffffff;
+      padding: 10px 22px;
+      border-radius: var(--radius-full);
+      font-weight: 800;
+      font-size: 0.85rem;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+      transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      z-index: 1000;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* MODAL OVERLAY STYLING FOR SHARE & EXPORT */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(11, 19, 41, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .modal-card {
+      background: var(--card-bg);
+      border: 1.5px solid var(--card-border);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      width: 100%;
+      max-width: 420px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7);
+      animation: modalSlideUp 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    [data-theme="light"] .modal-card {
+      background: #ffffff;
+    }
+
+    @keyframes modalSlideUp {
+      from {
+        opacity: 0;
+        transform: translateY(24px) scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal-close-btn {
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      color: var(--text-main);
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="app-container">
+
+    <!-- Header -->
+    <header>
+      <div class="brand">
+        <div class="brand-logo">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z" />
+          </svg>
+        </div>
+        <div class="brand-title">
+          <h1>ECCO Steel PWA</h1>
+          <p>Official ECCO Steel Quotation Generator</p>
+        </div>
+      </div>
+      <div style="display: flex; gap: 8px; align-items: center;">
+        <button class="cart-badge-btn" onclick="scrollToQuotationTable()" title="View Quotation Table">
+          🛒
+          <span class="cart-count" id="cart-count-badge">0</span>
+        </button>
+        <button class="icon-btn" id="theme-toggle-btn" title="Toggle Theme" aria-label="Toggle Theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- CARD 1: CHOOSE GRADE & DISCOUNT RATE -->
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">1. Grade & Global Discount Rate</span>
+        <span class="live-badge" id="grade-badge-top">Grade A Selected</span>
+      </div>
+
+      <!-- CHOOSE YOUR GRADE: A | B | DA -->
+      <span style="font-size: 0.78rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase;">Choose Your Grade</span>
+      <div class="grade-tile-grid" id="grade-btn-grid">
+        <button class="grade-tile-btn active" data-grade="A">
+          Grade A
+          <span class="sub">Square Mesh</span>
+        </button>
+        <button class="grade-tile-btn" data-grade="B">
+          Grade B
+          <span class="sub">Rectangular</span>
+        </button>
+        <button class="grade-tile-btn" data-grade="DA">
+          Grade DA
+          <span class="sub">Small Square</span>
+        </button>
+      </div>
+
+      <!-- GLOBAL DISCOUNT RATE INPUT (DISC 1 & DISC 2) -->
+      <div style="display: flex; flex-direction: column; gap: 6px;">
+        <span style="font-size: 0.78rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase;">Global Discount Rates</span>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+          <div class="input-box-wrapper active-purple">
+            <div>
+              <div class="input-label" style="color: var(--accent-purple);">Disc 1</div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 4px;">
+              <input type="text" id="global-disc1-input" class="input-field-custom" style="width: 60px; color: var(--accent-purple);" value="0" inputmode="decimal" onfocus="this.select()" oninput="handleGlobalDiscChange()" />
+              <span style="font-size: 1.2rem; font-weight: 800; color: var(--accent-purple);">%</span>
+            </div>
+          </div>
+          <div class="input-box-wrapper active-purple">
+            <div>
+              <div class="input-label" style="color: var(--accent-purple);">Disc 2</div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 4px;">
+              <input type="text" id="global-disc2-input" class="input-field-custom" style="width: 60px; color: var(--accent-purple);" value="0" inputmode="decimal" onfocus="this.select()" oninput="handleGlobalDiscChange()" />
+              <span style="font-size: 1.2rem; font-weight: 800; color: var(--accent-purple);">%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 2: MESH SIZES PRICING TABLE -->
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <span class="card-title" id="catalog-table-title">Grade A — All Sizes & Pricing</span>
+          <div style="font-size: 0.72rem; color: var(--text-muted); font-weight: 700; margin-top: 2px;">Std 6.0m × 2.2m (13.20m²)</div>
+        </div>
+        <button class="btn-touch-large" style="min-height: 32px; padding: 4px 12px; font-size: 0.76rem; background: var(--primary-gradient) !important; color: #fff !important; border: none !important; font-weight: 800; box-shadow: 0 4px 12px rgba(56,189,248,0.3);"
+          onclick="exportPriceListPngImage()">📸 Export Price Catalog PNG</button>
+      </div>
+
+      <!-- ALL SIZES TABLE -->
+      <div style="overflow-x: auto;">
+        <table class="price-catalog-table">
+          <thead>
+            <tr>
+              <th>Grade</th>
+              <th>Size</th>
+              <th>Ref No</th>
+              <th>D1(%)</th>
+              <th>D2(%)</th>
+              <th>Net Price (RM)</th>
+              <th>Qty</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="catalog-table-body">
+            <!-- Dynamically populated per Grade -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- CARD 3: QUOTATION REMARKS & TERMS -->
+    <div class="card" id="section-remarks-terms">
+      <div class="card-header">
+        <span class="card-title">Quotation Remarks & Terms</span>
+        <span class="live-badge">Header & Footer</span>
+      </div>
+
+      <!-- PAYMENT TERM: CBD / COD / -N/A- -->
+      <div style="display: flex; flex-direction: column; gap: 6px;">
+        <span style="font-size: 0.78rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase;">Payment Term</span>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;">
+          <button class="btn-touch-large active" id="term-btn-cbd" style="min-height: 44px; font-size: 0.85rem;" onclick="setPaymentTerm('CBD')">CBD</button>
+          <button class="btn-touch-large" id="term-btn-30 DAYS" style="min-height: 44px; font-size: 0.85rem;" onclick="setPaymentTerm('30 DAYS')">30 DAYS</button>
+          <button class="btn-touch-large" id="term-btn-60 DAYS" style="min-height: 44px; font-size: 0.85rem;" onclick="setPaymentTerm('60 DAYS')">60 DAYS</button>
+        </div>
+      </div>
+
+      <!-- VALIDITY PERIOD SELECTOR (1, 3, 7, 14, -N/A-) -->
+      <div style="display: flex; flex-direction: column; gap: 6px;">
+        <span style="font-size: 0.78rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase;">Validity Period</span>
+        <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px;" id="validity-btn-grid">
+          <button class="btn-touch-large active" id="validity-preset-1" style="min-height: 44px; padding: 4px; font-size: 0.78rem;" onclick="setValidityDays(1)">1 Day</button>
+          <button class="btn-touch-large" id="validity-preset-3" style="min-height: 44px; padding: 4px; font-size: 0.78rem;" onclick="setValidityDays(3)">3 Days</button>
+          <button class="btn-touch-large" id="validity-preset-7" style="min-height: 44px; padding: 4px; font-size: 0.78rem;" onclick="setValidityDays(7)">7 Days</button>
+          <button class="btn-touch-large" id="validity-preset-14" style="min-height: 44px; padding: 4px; font-size: 0.78rem;" onclick="setValidityDays(14)">14 Days</button>
+          <button class="btn-touch-large" id="validity-preset-na" style="min-height: 44px; padding: 4px; font-size: 0.78rem;" onclick="setValidityDays('-N/A-')">-N/A-</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 4: OFFICIAL ECCO STEEL MESH QUOTATION TABLE & LOGISTICS -->
+    <div id="quotation-table-section" style="display: flex; flex-direction: column; gap: 14px;">
+
+      <!-- FLOATING ACTION TOOLBAR -->
+      <div class="summary-floating-toolbar" data-html2canvas-ignore="true">
+        <span style="font-weight: 800; font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em;">⚡ Actions</span>
+        <div style="display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end;">
+          <button class="btn-touch-large" data-html2canvas-ignore="true"
+            style="min-height: 34px; padding: 4px 10px; font-size: 0.76rem; background: var(--accent-emerald-gradient) !important; color: #fff !important; border: none !important; font-weight: 800;"
+            onclick="shareToWhatsAppText()">💬 WhatsApp</button>
+          <button class="btn-touch-large" data-html2canvas-ignore="true"
+            style="min-height: 34px; padding: 4px 10px; font-size: 0.76rem; background: rgba(56, 189, 248, 0.15) !important; color: var(--primary) !important; border: 1px solid rgba(56, 189, 248, 0.3) !important; font-weight: 800;"
+            onclick="exportPngImage()">📸 PNG</button>
+          <button class="btn-touch-large" data-html2canvas-ignore="true"
+            style="min-height: 34px; padding: 4px 10px; font-size: 0.76rem; font-weight: 800;"
+            onclick="copyQuoteText()">📋 Copy</button>
+          <button class="btn-touch-large" data-html2canvas-ignore="true"
+            style="min-height: 34px; padding: 4px 8px; font-size: 0.76rem; background: rgba(244, 63, 94, 0.15) !important; color: var(--accent-red) !important; border: 1px solid rgba(244, 63, 94, 0.3) !important;"
+            onclick="clearAllItemsFromCart()" title="Clear All">🗑️ Clear</button>
+        </div>
+      </div>
+
+      <!-- EXPORT TARGET CONTAINING QUOTATION TABLE & FLEET LOGISTICS -->
+      <div id="summary-export-target" style="display: flex; flex-direction: column; gap: 14px;">
+        <!-- OFFICIAL ECCO STEEL QUOTATION SHEET -->
+        <div class="ecco-quote-container">
+          <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; font-family: Arial, Helvetica, sans-serif; user-select: text !important;">
+            <div style="display: flex; justify-content: space-between; align-items: center; user-select: text !important;">
+              <div style="display: flex; align-items: center; gap: 12px; user-select: text !important;">
+                
+                <!-- ECCO Logo Added Here -->
+                <img src="data:image/png;base64,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16TGUwIUkogLdVcMRHhC4yCD4C7pM5cdG/y7NvS3bzX0sw2CrKG+tnxIkyuErR/iNg9Cuh81DrBT+wy2i/oOsSsCUe7T0J+iDcKlLkg4BnTjFx0FofMgFA150Pl++tOf2vnnn2+333673XXXXXb//ffb3//+d7vzzjvt5ptvju4///nPGHfttdfaKaecYltssYUNGjQodkrKQySV1WJBf4S6EAufPn36RAI5+uij7bLLLrO//e1vUf9bb73V0PXKK6+0iy66KAr+W265xR544AEj/pRTTrHtt9/e+AFIxEK51IGE4svyn8qmLuqlkjXXWMOOOvJI+81vfmPHHXuc/fAHP7D99t3X9tpzL9thhx1so402sq222tK+/e1vR6Lce6+97Pvf/759Z599IkkuuMACFBMJtiVY+5LKei6sl33o572sSd3fHECCoCAqSt9S/ezyQGAQ4aGNAw2CW1aNNkgNNi0kmGgtNjXI5CAT8oQw4qaEcNJR7nwh3yrqY9sHosRyhGR3CHUQh3QXMdIBJcXOQicMqtp3vvMdu/TSS+2+++6LZHH88cfbQQcdZN/61reidbLJJptEy2rddde1tdde23DplFgue4XO+LOf/cx+//vfR+K85pprYnmUSwenDklGvdZNH0mxPMpGLHwgZeqGvC+++GI76qijbP/994+kseGGG0a9V1llFfu///s/W3755aPgX2uttWzjjTeOREM7zj33XLvjjjuMsiCcUHQbVpJivdZNH0mxvNSGoUOH2g8C+Z1z9tl23HHHBStwW/tGwHvJpZaweeaZxwYNzn50pk2bFn98mmY0mcJf/379bcEFF7Slllwytm+zTTeNVuQOgeBHLLNMuMospud8SDL/dIxAQ8dJ6jsFAEGGkBOW4WWBDM8Mlt0OgcCWC0RIOAQ3IVx+EF5TgAsJTvznMsyVGNj6RbopwT8p5MWFJOdWg20byj41DMN/Hgg3RIdYC5e/zdEHYqJjIFh1kN+999xjp556aiQQyOHrX/+6zTfffIbV2NnKBg4caMstt5xtsMEGtvfee8fy7r77bqN86qE+Or4kk9TZYgumS22gPBJA6FiDv/vd72Ldm222mS277LI2ZMgQmz59ukEgkydPtlyZMmWKISkMP+n69+9viy22mIEDZE+Zt912m2E5UxftQNCB4zkRyqAs2oH/sMMOiz8s3zvw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" alt="ECCO" style="height: 38px; width: auto; object-fit: contain; pointer-events: none;" />
+                
+                <span style="font-weight: 900; font-size: 1.35rem; text-decoration: underline; color: #000000; letter-spacing: 0.02em; user-select: text !important; line-height: 1;">ECCO Steel Industries Sdn Bhd</span>
+              </div>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.76rem; color: #1e293b; font-weight: 600; padding-top: 4px; border-top: 1px dashed rgba(0,0,0,0.15); user-select: text !important;">
+              <span>Date: <strong id="ecco-quote-date" style="font-weight: 700; user-select: text !important;">05/08/2026</strong></span>
+            </div>
+          </div>
+
+          <table class="ecco-table">
+            <thead>
+              <tr>
+                <th>Fabric Reference No</th>
+                <th>MS145: 2014</th>
+                <th>List Price (RM) per Sq. m</th>
+                <th>kg/m2</th>
+                <th>Qty - PCS</th>
+                <th>Unit Price (RM/PC)</th>
+                <th>Total (RM)</th>
+              </tr>
+            </thead>
+            <tbody id="ecco-table-body">
+              <!-- Dynamically rendered grouped rows -->
+            </tbody>
+            <tfoot>
+              <tr class="total-row">
+                <td colspan="6" style="text-align: right; font-weight: 800;">Total</td>
+                <td id="ecco-grand-total" style="font-weight: 800; font-size: 0.88rem;">RM 0.00</td>
+              </tr>
+            </tfoot>
+          </table>
+
+          <!-- OFFICIAL QUOTATION FOOTER TERMS -->
+          <div class="ecco-terms-box" style="display: flex; flex-direction: column; gap: 2px; margin-top: 14px;">
+            <div style="display: flex; align-items: baseline;">
+              <strong>Brand:&nbsp;</strong> <span style="position: relative; top: -3px;">ECCO</span>
+            </div>
+            <div style="display: flex; align-items: baseline;">
+              <strong>Term:&nbsp;</strong> <span id="ecco-term-display" style="position: relative; top: -3px;">CBD</span>
+            </div>
+            <div style="display: flex; align-items: baseline;">
+              <strong>Validity:&nbsp;</strong> <span style="position: relative; top: -3px;"><span id="ecco-validity-display">1 day</span>, subjected to our final confirmation</span>
+            </div>
+          </div>
+         </div>
+
+        <!-- COMBINED FLEET LOGISTICS -->
+        <div class="card logistics-card">
+          <div class="card-header">
+            <span class="card-title">Combined Transport Fleet Requirement</span>
+            <span class="live-badge" style="background: rgba(245, 158, 11, 0.2); color: var(--accent-amber);">Fleet</span>
+          </div>
+
+          <div class="lorry-capacity-alert normal" id="lorry-alert-box">
+            <div class="fleet-icon">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm13.5-9l1.96 2.5H17V9.5h2.5zm-1 9c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z" />
+              </svg>
+            </div>
+            <div class="fleet-details">
+              <h4 id="lorry-status-title">Fleet Capacity Status</h4>
+              <p id="lorry-status-desc">Calculating combined load...</p>
+            </div>
+          </div>
+
+          <div class="truck-grid">
+            <div class="truck-box">
+              <div class="truck-header">
+                <span>🚚 20FT Lorry</span>
+                <span class="truck-qty" id="qty-20ft">0</span>
+              </div>
+              <div class="progress-bar-bg">
+                <div class="progress-bar-fill" id="progress-20ft" style="width: 0%;"></div>
+              </div>
+              <div class="truck-meta">
+                <span id="load-pct-20ft">0% Load</span>
+              </div>
+            </div>
+
+            <div class="truck-box">
+              <div class="truck-header">
+                <span>🚛 40FT Trailer</span>
+                <span class="truck-qty" id="qty-40ft">0</span>
+              </div>
+              <div class="progress-bar-bg">
+                <div class="progress-bar-fill" id="progress-40ft" style="width: 0%;"></div>
+              </div>
+              <div class="truck-meta">
+                <span id="load-pct-40ft">0% Load</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <footer>
+      ECCO Steel Industries Sdn Bhd • Official ECCO Quotation Generator
+    </footer>
+
+  </div>
+
+  <!-- STICKY BOTTOM DOCK -->
+  <div class="sticky-bottom-dock">
+    <div class="dock-container" id="dock-nav-container">
+      <button class="dock-btn" style="flex: 1; background: var(--input-bg); border: 1.5px solid var(--card-border); color: var(--text-main);" onclick="scrollToQuotationTable()">
+        📋 View Quote Table
+      </button>
+      <button class="dock-btn" style="flex: 1; background: rgba(56, 189, 248, 0.15); color: var(--primary); border: 1px solid rgba(56, 189, 248, 0.3);" onclick="exportPngImage()">
+        📸 Export Quote PNG
+      </button>
+      <button class="dock-btn" style="flex: 1.5; background: var(--accent-emerald-gradient); color: #ffffff;" onclick="shareToWhatsAppText()">
+        💬 Share WhatsApp
+      </button>
+    </div>
+  </div>
+
+  <div class="toast" id="toast-notification">Quote copied to clipboard!</div>
+
+  <!-- SHARE QUOTATION MODAL -->
+  <div id="share-modal-overlay" class="modal-overlay" style="display: none;" onclick="if(event.target===this) closeShareModal();">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span style="font-size: 1.2rem;">💬</span>
+          <span style="font-weight: 800; font-size: 1.05rem; color: var(--text-main);">Share Quotation Summary</span>
+        </div>
+        <button class="modal-close-btn" onclick="closeShareModal()" aria-label="Close">✖</button>
+      </div>
+
+      <div style="font-size: 0.82rem; color: #10b981; font-weight: 800; background: rgba(16, 185, 129, 0.12); padding: 10px 14px; border-radius: var(--radius-md); border: 1px solid rgba(16, 185, 129, 0.3); text-align: center;">
+        ✅ Quote text copied! Ready to paste into WhatsApp
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <button class="btn-touch-large" style="background: #25D366 !important; color: #ffffff !important; font-weight: 800; border: none !important; min-height: 50px; font-size: 0.95rem; display: flex; align-items: center; justify-content: center; gap: 8px; border-radius: var(--radius-full) !important; box-shadow: 0 4px 14px rgba(37, 211, 102, 0.35);" onclick="openWhatsAppWaMe()">
+          💬 Launch WhatsApp App
+        </button>
+
+        <button class="btn-touch-large" style="background: var(--input-bg); color: var(--text-main); font-weight: 800; border: 1.5px solid var(--card-border); min-height: 46px; font-size: 0.88rem; display: flex; align-items: center; justify-content: center; gap: 8px; border-radius: var(--radius-full) !important;" onclick="copyQuoteText()">
+          📋 Copy Quote Text Again
+        </button>
+
+        <button class="btn-touch-large" style="background: rgba(56, 189, 248, 0.15) !important; color: var(--primary) !important; font-weight: 800; border: 1px solid rgba(56, 189, 248, 0.3) !important; min-height: 46px; font-size: 0.88rem; display: flex; align-items: center; justify-content: center; gap: 8px; border-radius: var(--radius-full) !important;" onclick="exportPngImage(); closeShareModal();">
+          📸 Save PNG Image Sheet
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // MASTER DATA CLASSIFIED BY GRADE AND SIZE
+    const MESH_GRADE_DATA = {
+      "A": {
+        name: "SQUARE MESH",
+        spacing: "Spacing: 200mm x 200mm",
+        sizes: {
+          "4": { ms145: "A 63", kgSqm: 0.99, bdl: 50, sqmPrice: 7.50, weightPc: 13.07, cap20: 500, cap40: 1000 },
+          "5": { ms145: "A 98", kgSqm: 1.54, bdl: 50, sqmPrice: 11.60, weightPc: 20.33, cap20: 400, cap40: 700 },
+          "6": { ms145: "A 142", kgSqm: 2.22, bdl: 50, sqmPrice: 15.00, weightPc: 29.30, cap20: 300, cap40: 600 },
+          "7": { ms145: "A 193", kgSqm: 3.02, bdl: 50, sqmPrice: 20.40, weightPc: 39.86, cap20: 300, cap40: 500 },
+          "8": { ms145: "A 252", kgSqm: 3.95, bdl: 30, sqmPrice: 26.70, weightPc: 52.14, cap20: 230, cap40: 400 },
+          "9": { ms145: "A 318", kgSqm: 4.99, bdl: 30, sqmPrice: 33.70, weightPc: 65.87, cap20: 200, cap40: 400 },
+          "10": { ms145: "A 393", kgSqm: 6.16, bdl: 20, sqmPrice: 41.60, weightPc: 81.31, cap20: 200, cap40: 400 },
+          "11": { ms145: "A 475", kgSqm: 7.46, bdl: 20, sqmPrice: 50.40, weightPc: 98.47, cap20: 150, cap40: 300 },
+          "12": { ms145: "A 565", kgSqm: 8.88, bdl: 15, sqmPrice: 66.60, weightPc: 117.22, cap20: 100, cap40: 200 },
+          "13": { ms145: "A 663", kgSqm: 10.42, bdl: 15, sqmPrice: 78.20, weightPc: 137.54, cap20: 80, cap40: 160 }
+        }
+      },
+      "B": {
+        name: "RECTANGULAR MESH",
+        spacing: "Spacing: 100mm x 200mm",
+        sizes: {
+          "5": { ms145: "B 196", kgSqm: 3.05, bdl: 30, sqmPrice: 22.90, weightPc: 40.26, cap20: 300, cap40: 600 },
+          "6": { ms145: "B 283", kgSqm: 3.73, bdl: 30, sqmPrice: 25.20, weightPc: 49.24, cap20: 250, cap40: 500 },
+          "7": { ms145: "B 385", kgSqm: 4.53, bdl: 25, sqmPrice: 30.60, weightPc: 59.80, cap20: 200, cap40: 400 },
+          "8": { ms145: "B 503", kgSqm: 5.93, bdl: 20, sqmPrice: 40.10, weightPc: 78.28, cap20: 180, cap40: 300 },
+          "9": { ms145: "B 636", kgSqm: 6.97, bdl: 20, sqmPrice: 47.10, weightPc: 92.00, cap20: 150, cap40: 300 },
+          "10": { ms145: "B 785", kgSqm: 8.14, bdl: 15, sqmPrice: 54.90, weightPc: 107.45, cap20: 110, cap40: 250 },
+          "11": { ms145: "B 950", kgSqm: 9.44, bdl: 15, sqmPrice: 63.70, weightPc: 124.61, cap20: 90, cap40: 200 },
+          "12": { ms145: "B 1131", kgSqm: 10.90, bdl: 10, sqmPrice: 81.40, weightPc: 143.88, cap20: 70, cap40: 160 },
+          "13": { ms145: "B 1325", kgSqm: 12.40, bdl: 10, sqmPrice: 101.30, weightPc: 163.68, cap20: 60, cap40: 120 }
+        }
+      },
+      "DA": {
+        name: "SMALL SQUARE MESH",
+        spacing: "Spacing: 100mm x 100mm",
+        sizes: {
+          "4": { ms145: "DA 126", kgSqm: 1.93, bdl: 50, sqmPrice: 15.00, weightPc: 25.48, cap20: 500, cap40: 800 },
+          "5": { ms145: "DA 196", kgSqm: 3.08, bdl: 30, sqmPrice: 23.20, weightPc: 40.66, cap20: 300, cap40: 560 },
+          "6": { ms145: "DA 283", kgSqm: 4.44, bdl: 25, sqmPrice: 30.00, weightPc: 58.61, cap20: 200, cap40: 480 },
+          "7": { ms145: "DA 385", kgSqm: 6.04, bdl: 20, sqmPrice: 40.80, weightPc: 79.73, cap20: 150, cap40: 300 },
+          "8": { ms145: "DA 503", kgSqm: 7.90, bdl: 15, sqmPrice: 53.40, weightPc: 104.28, cap20: 110, cap40: 225 },
+          "9": { ms145: "DA 636", kgSqm: 9.98, bdl: 15, sqmPrice: 67.40, weightPc: 131.74, cap20: 100, cap40: 200 },
+          "10": { ms145: "DA 785", kgSqm: 12.32, bdl: 10, sqmPrice: 83.20, weightPc: 162.62, cap20: 70, cap40: 160 },
+          "11": { ms145: "DA 950", kgSqm: 14.91, bdl: 10, sqmPrice: 100.80, weightPc: 196.81, cap20: 60, cap40: 130 },
+          "12": { ms145: "DA 1131", kgSqm: 17.76, bdl: 8, sqmPrice: 133.20, weightPc: 234.43, cap20: 50, cap40: 100 },
+          "13": { ms145: "DA 1325", kgSqm: 20.85, bdl: 8, sqmPrice: 156.40, weightPc: 275.22, cap20: 40, cap40: 80 }
+        }
+      }
+    };
+
+    // APP STATE
+    let currentGrade = "A";
+    let globalDiscount1Rate = 0.0; // %
+    let globalDiscount2Rate = 0.0; // %
+    let currentLength = 6.0;
+    let currentWidth = 2.2;
+    let quotationCart = []; // Multi-item cart
+
+    // Per-size state maps
+    let sizeDiscounts1Map = {};
+    let sizeDiscounts2Map = {};
+    let sizeNetPriceMap = {};
+    let sizeQtyMap = {};
+
+    // DOM References
+    const catalogTableBody = document.getElementById('catalog-table-body');
+    const catalogTableTitle = document.getElementById('catalog-table-title');
+    const gradeBadgeTop = document.getElementById('grade-badge-top');
+    const cartCountBadge = document.getElementById('cart-count-badge');
+    const eccoTableBody = document.getElementById('ecco-table-body');
+    const eccoGrandTotal = document.getElementById('ecco-grand-total');
+
+    const lorryAlertBox = document.getElementById('lorry-alert-box');
+    const lorryStatusTitle = document.getElementById('lorry-status-title');
+    const lorryStatusDesc = document.getElementById('lorry-status-desc');
+
+    const qty20ft = document.getElementById('qty-20ft');
+    const qty40ft = document.getElementById('qty-40ft');
+    const progress20ft = document.getElementById('progress-20ft');
+    const progress40ft = document.getElementById('progress-40ft');
+    const loadPct20ft = document.getElementById('load-pct-20ft');
+    const loadPct40ft = document.getElementById('load-pct-40ft');
+
+    // Formatters
+    const formatRM = (val) => val.toLocaleString('en-MY', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const formatNumber = (val) => val.toLocaleString('en-MY');
+
+    function scrollToQuotationTable() {
+      const section = document.getElementById('quotation-table-section');
+      if (section) section.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // GRADE SELECTION HANDLER
+    document.querySelectorAll('#grade-btn-grid .grade-tile-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('#grade-btn-grid .grade-tile-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentGrade = btn.dataset.grade;
+        if (gradeBadgeTop) gradeBadgeTop.textContent = `Grade ${currentGrade} Selected`;
+        if (catalogTableTitle) catalogTableTitle.textContent = `Grade ${currentGrade} — All Sizes & Pricing`;
+        renderCatalogTable();
+      });
+    });
+
+    // GLOBAL DISCOUNT CHANGE
+    window.handleGlobalDiscChange = function () {
+      const val1 = document.getElementById('global-disc1-input').value.replace(/[^0-9.]/g, '');
+      const val2 = document.getElementById('global-disc2-input').value.replace(/[^0-9.]/g, '');
+      
+      globalDiscount1Rate = Math.min(100, Math.max(0, parseFloat(val1) || 0));
+      globalDiscount2Rate = Math.min(100, Math.max(0, parseFloat(val2) || 0));
+
+      const area = currentLength * currentWidth;
+      const sizes = Object.keys(MESH_GRADE_DATA[currentGrade].sizes);
+      
+      sizes.forEach(sz => {
+        const key = `${currentGrade}_${sz}`;
+        sizeDiscounts1Map[key] = globalDiscount1Rate;
+        sizeDiscounts2Map[key] = globalDiscount2Rate;
+        const itemData = MESH_GRADE_DATA[currentGrade].sizes[sz];
+        const basePrice = itemData.sqmPrice * area;
+        
+        // Successive discount calculation
+        sizeNetPriceMap[key] = parseFloat((basePrice * (1 - (globalDiscount1Rate / 100)) * (1 - (globalDiscount2Rate / 100))).toFixed(2));
+      });
+
+      renderCatalogTable();
+    };
+
+    // RENDER CATALOG TABLE
+    function renderCatalogTable() {
+      catalogTableBody.innerHTML = '';
+      const gradeObj = MESH_GRADE_DATA[currentGrade];
+      const area = currentLength * currentWidth; 
+
+      Object.keys(gradeObj.sizes).forEach(sz => {
+        const itemData = gradeObj.sizes[sz];
+        const key = `${currentGrade}_${sz}`;
+        const basePrice = itemData.sqmPrice * area;
+
+        if (sizeDiscounts1Map[key] === undefined) sizeDiscounts1Map[key] = globalDiscount1Rate;
+        if (sizeDiscounts2Map[key] === undefined) sizeDiscounts2Map[key] = globalDiscount2Rate;
+
+        if (sizeNetPriceMap[key] === undefined) {
+          sizeNetPriceMap[key] = parseFloat((basePrice * (1 - (sizeDiscounts1Map[key] / 100)) * (1 - (sizeDiscounts2Map[key] / 100))).toFixed(2));
+        }
+
+        const disc1Rate = sizeDiscounts1Map[key];
+        const disc2Rate = sizeDiscounts2Map[key];
+        const netPrice = sizeNetPriceMap[key];
+        const qtyVal = sizeQtyMap[key] || 0;
+
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><strong>${currentGrade}</strong></td>
+          <td><strong>${sz}</strong></td>
+          <td style="color: var(--text-muted); font-size: 0.8rem;">${itemData.ms145}</td>
+          <td>
+            <input type="text" id="disc1-input-${key}" class="disc-input-cell" style="width:52px;" value="${disc1Rate}" inputmode="decimal"
+              onfocus="this.select()" oninput="handleRowDiscChange('${currentGrade}', '${sz}', 1, this.value)" />
+          </td>
+          <td>
+            <input type="text" id="disc2-input-${key}" class="disc-input-cell" style="width:52px;" value="${disc2Rate}" inputmode="decimal"
+              onfocus="this.select()" oninput="handleRowDiscChange('${currentGrade}', '${sz}', 2, this.value)" />
+          </td>
+          <td>
+            <div style="display: flex; align-items: center; justify-content: center; gap: 2px;">
+              <input type="text" id="net-price-input-${key}" class="net-input-cell" value="${netPrice.toFixed(2)}" inputmode="decimal"
+                onfocus="this.select()" oninput="handleRowNetPriceChange('${currentGrade}', '${sz}', this.value)" />
+            </div>
+          </td>
+          <td>
+            <input type="number" class="qty-input-cell" min="0" value="${qtyVal}" inputmode="numeric"
+              onfocus="this.select()" oninput="handleRowQtyChange('${currentGrade}', '${sz}', this.value)" />
+          </td>
+          <td>
+            <button class="btn-add-row" onclick="addSingleRowToCart('${currentGrade}', '${sz}')">➕ Add</button>
+          </td>
+        `;
+        catalogTableBody.appendChild(tr);
+      });
+    }
+
+    // ROW DISCOUNT CHANGE -> UPDATE NET PRICE
+    window.handleRowDiscChange = function (grade, sz, discType, val) {
+      const cleanVal = val.replace(/[^0-9.]/g, '');
+      const numVal = Math.min(100, Math.max(0, parseFloat(cleanVal) || 0));
+      const key = `${grade}_${sz}`;
+      
+      if (discType === 1) sizeDiscounts1Map[key] = numVal;
+      if (discType === 2) sizeDiscounts2Map[key] = numVal;
+
+      const d1 = sizeDiscounts1Map[key] || 0;
+      const d2 = sizeDiscounts2Map[key] || 0;
+
+      const itemData = MESH_GRADE_DATA[grade].sizes[sz];
+      const area = currentLength * currentWidth;
+      const basePrice = itemData.sqmPrice * area;
+      
+      const netPrice = parseFloat((basePrice * (1 - (d1 / 100)) * (1 - (d2 / 100))).toFixed(2));
+      sizeNetPriceMap[key] = netPrice;
+
+      const netEl = document.getElementById(`net-price-input-${key}`);
+      if (netEl) netEl.value = netPrice.toFixed(2);
+    };
+
+    // ROW NET PRICE CHANGE -> BACK-CALCULATE DISCOUNT 1 (Sets Disc 2 to 0)
+    window.handleRowNetPriceChange = function (grade, sz, rawVal) {
+      const cleanVal = rawVal.replace(/[^0-9.]/g, '');
+      const numVal = Math.max(0, parseFloat(cleanVal) || 0);
+      const key = `${grade}_${sz}`;
+      sizeNetPriceMap[key] = numVal;
+
+      const itemData = MESH_GRADE_DATA[grade].sizes[sz];
+      const area = currentLength * currentWidth;
+      const basePrice = itemData.sqmPrice * area;
+
+      if (basePrice > 0) {
+        // When overriding Net Price, calculate the equivalent as a single D1, reset D2 to 0
+        const calcDisc1 = Math.max(0, Math.min(100, ((basePrice - numVal) / basePrice) * 100));
+        const formattedDisc1 = parseFloat(calcDisc1.toFixed(2));
+        
+        sizeDiscounts1Map[key] = formattedDisc1;
+        sizeDiscounts2Map[key] = 0;
+
+        const disc1El = document.getElementById(`disc1-input-${key}`);
+        const disc2El = document.getElementById(`disc2-input-${key}`);
+        if (disc1El) disc1El.value = formattedDisc1;
+        if (disc2El) disc2El.value = 0;
+      }
+    };
+
+    // ROW QTY CHANGE
+    window.handleRowQtyChange = function (grade, sz, val) {
+      const key = `${grade}_${sz}`;
+      const qtyNum = Math.max(0, parseInt(val, 10) || 0);
+      sizeQtyMap[key] = qtyNum;
+    };
+
+    // ADD SINGLE ROW ITEM TO QUOTATION TABLE
+    window.addSingleRowToCart = function (grade, sz) {
+      const key = `${grade}_${sz}`;
+      const itemData = MESH_GRADE_DATA[grade].sizes[sz];
+      const area = currentLength * currentWidth;
+      
+      const d1 = sizeDiscounts1Map[key] !== undefined ? sizeDiscounts1Map[key] : globalDiscount1Rate;
+      const d2 = sizeDiscounts2Map[key] !== undefined ? sizeDiscounts2Map[key] : globalDiscount2Rate;
+      
+      const finalUnit = sizeNetPriceMap[key] !== undefined ? sizeNetPriceMap[key] : (itemData.sqmPrice * area * (1 - d1 / 100) * (1 - d2 / 100));
+      const rowQty = sizeQtyMap[key] || 1;
+
+      if (rowQty <= 0) {
+        showToast('⚠️ Please enter quantity greater than 0');
+        return;
+      }
+
+      const basePrice = itemData.sqmPrice * area;
+      const totalNet = finalUnit * rowQty;
+
+      const stdArea = 13.2;
+      const pcWeightScaled = (itemData.weightPc / stdArea) * area;
+      const weightKg = pcWeightScaled * rowQty;
+
+      const newItem = {
+        id: Date.now() + Math.random(),
+        grade: grade,
+        size: sz,
+        refNo: `${grade} ${sz}`,
+        ms145: itemData.ms145,
+        gradeName: MESH_GRADE_DATA[grade].name,
+        spacing: MESH_GRADE_DATA[grade].spacing,
+        length: currentLength,
+        width: currentWidth,
+        area: area,
+        sqmPrice: itemData.sqmPrice,
+        kgSqm: itemData.kgSqm,
+        bdl: itemData.bdl,
+        basePrice: basePrice,
+        disc1: d1,
+        disc2: d2,
+        finalUnit: finalUnit,
+        qty: rowQty,
+        totalNet: totalNet,
+        weightKg: weightKg,
+        cap20: itemData.cap20,
+        cap40: itemData.cap40,
+        isCustom: false
+      };
+
+      quotationCart.push(newItem);
+      updateCartUI();
+      calculateFleetLogistics();
+      showToast(`✅ Added Grade ${grade} Size ${sz} (${rowQty} pcs) to Quotation Table!`);
+    };
+
+    // MULTI-ITEM CART FUNCTIONS
+    window.removeItemFromCart = function (id) {
+      quotationCart = quotationCart.filter(item => item.id !== id);
+      showToast('🗑️ Item removed from quotation!');
+      updateCartUI();
+      calculateFleetLogistics();
+    };
+
+    window.clearAllItemsFromCart = function () {
+      if (quotationCart.length === 0) return;
+      quotationCart = [];
+      showToast('🗑️ Cleared all items from quotation!');
+      updateCartUI();
+      calculateFleetLogistics();
+    };
+
+    function updateCartUI() {
+      cartCountBadge.textContent = quotationCart.length.toString();
+      renderEccoQuotationTable();
+    }
+
+    window.updateCartItemUnitPrice = function (itemId, newValue) {
+      const val = parseFloat(newValue);
+      const cartItem = quotationCart.find(i => i.id === itemId);
+      if (cartItem && !isNaN(val) && val >= 0) {
+        cartItem.finalUnit = val;
+        cartItem.totalNet = cartItem.finalUnit * cartItem.qty;
+
+        const totalCell = document.getElementById(`item-total-${itemId}`);
+        if (totalCell) {
+          totalCell.textContent = formatRM(cartItem.totalNet);
+        }
+
+        let grandTotalNet = 0;
+        quotationCart.forEach(i => grandTotalNet += i.totalNet);
+        eccoGrandTotal.textContent = `RM ${formatRM(grandTotalNet)}`;
+      }
+    };
+
+    // RENDER OFFICIAL ECCO QUOTATION TABLE
+    function renderEccoQuotationTable() {
+      eccoTableBody.innerHTML = '';
+
+      if (quotationCart.length === 0) {
+        const emptyRow = document.createElement('tr');
+        emptyRow.setAttribute('data-html2canvas-ignore', 'true');
+        emptyRow.innerHTML = `
+          <td colspan="7" style="padding: 16px; text-align: center; color: #64748b; font-style: italic; font-size: 0.85rem;">
+            🛒 Quotation table is empty. Select Grade above and tap <strong>"➕ Add"</strong> on any size row.
+          </td>
+        `;
+        eccoTableBody.appendChild(emptyRow);
+        eccoGrandTotal.textContent = 'RM 0.00';
+        return;
+      }
+
+      const listToRender = quotationCart;
+      let grandTotalNet = 0;
+
+      const groups = {};
+      listToRender.forEach(item => {
+        let dimText = `6.0m x 2.2m (Standard)`;
+        const groupKey = `${item.gradeName} - ${dimText} (${item.spacing})`;
+        if (!groups[groupKey]) groups[groupKey] = [];
+        groups[groupKey].push(item);
+        grandTotalNet += item.totalNet;
+      });
+
+      const gradeOrderMap = { "A": 1, "B": 2, "DA": 3 };
+      const sortedGroupKeys = Object.keys(groups).sort((keyA, keyB) => {
+        const itemA = groups[keyA][0];
+        const itemB = groups[keyB][0];
+        const orderA = gradeOrderMap[itemA.grade] || 99;
+        const orderB = gradeOrderMap[itemB.grade] || 99;
+        return orderA - orderB;
+      });
+
+      sortedGroupKeys.forEach(groupTitle => {
+        const subheadRow = document.createElement('tr');
+        subheadRow.className = 'subhead-row';
+        subheadRow.innerHTML = `<td colspan="7"><strong>${groupTitle}</strong></td>`;
+        eccoTableBody.appendChild(subheadRow);
+
+        groups[groupTitle].forEach(it => {
+          const row = document.createElement('tr');
+          row.className = 'item-row';
+          row.innerHTML = `
+            <td style="white-space: nowrap;">
+              <button class="btn-delete-item" onclick="removeItemFromCart(${it.id})" title="Delete item" data-html2canvas-ignore="true" style="display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; padding: 0; margin-right: 6px; font-size: 0.65rem; border-radius: 50%; background: rgba(244,63,94,0.15); color: #f43f5e; border: 1px solid rgba(244,63,94,0.3); font-weight: 800; cursor: pointer; vertical-align: middle;">✖</button>${it.refNo}
+            </td>
+            <td>${it.ms145}</td>
+            <td>${it.sqmPrice.toFixed(2)}</td>
+            <td>${it.kgSqm.toFixed(2)}</td>
+            <td>${formatNumber(it.qty)}</td>
+            <td style="padding: 2px 4px;">
+              <input type="number" class="unit-price-input" step="0.01" min="0" value="${it.finalUnit.toFixed(2)}" oninput="updateCartItemUnitPrice(${it.id}, this.value)" style="width: 78px; text-align: center; font-weight: 700; font-size: 0.82rem; border: 1px solid #cbd5e1; border-radius: 4px; padding: 2px 4px; background: #ffffff; color: #0f172a; font-family: inherit;" />
+            </td>
+            <td id="item-total-${it.id}" style="font-weight:700;">RM ${formatRM(it.totalNet)}</td>
+          `;
+          eccoTableBody.appendChild(row);
+        });
+      });
+
+      eccoGrandTotal.textContent = `RM ${formatRM(grandTotalNet)}`;
+    }
+
+    // FLEET LOGISTICS CALCULATIONS
+    function calculateFleetLogistics() {
+      let totalLorry20LoadPct = 0;
+      let totalLorry40LoadPct = 0;
+      let grandTotalSheets = 0;
+
+      quotationCart.forEach(it => {
+        grandTotalSheets += it.qty;
+        if (it.cap20) totalLorry20LoadPct += (it.qty / it.cap20);
+        if (it.cap40) totalLorry40LoadPct += (it.qty / it.cap40);
+      });
+
+      const trucks20Count = Math.ceil(totalLorry20LoadPct) || 0;
+      const trucks40Count = Math.ceil(totalLorry40LoadPct) || 0;
+
+      qty20ft.textContent = formatNumber(trucks20Count);
+      qty40ft.textContent = formatNumber(trucks40Count);
+
+      const rem20Pct = Math.round((totalLorry20LoadPct % 1 || (totalLorry20LoadPct > 0 ? 1 : 0)) * 100);
+      const rem40Pct = Math.round((totalLorry40LoadPct % 1 || (totalLorry40LoadPct > 0 ? 1 : 0)) * 100);
+
+      progress20ft.style.width = `${rem20Pct}%`;
+      loadPct20ft.textContent = `${rem20Pct}% Load`;
+
+      progress40ft.style.width = `${rem40Pct}%`;
+      loadPct40ft.textContent = `${rem40Pct}% Load`;
+
+      lorryAlertBox.className = 'lorry-capacity-alert';
+      if (grandTotalSheets === 0) {
+        lorryAlertBox.classList.add('normal');
+        lorryStatusTitle.textContent = 'Enter Quantity';
+        lorryStatusDesc.textContent = 'Add items to quotation to calculate lorry capacity.';
+      } else if (totalLorry20LoadPct <= 1.0) {
+        lorryAlertBox.classList.add('normal');
+        lorryStatusTitle.textContent = 'Within Single 20FT Lorry Capacity';
+        lorryStatusDesc.textContent = `Total ${formatNumber(grandTotalSheets)} sheets fits inside 1x 20FT Lorry (${rem20Pct}% full).`;
+      } else if (totalLorry40LoadPct <= 1.0) {
+        lorryAlertBox.classList.add('reached');
+        lorryStatusTitle.textContent = '✅ Fits Inside 1x 40FT Trailer!';
+        lorryStatusDesc.textContent = `Total ${formatNumber(grandTotalSheets)} sheets fits inside 1x 40FT Trailer (${rem40Pct}% full).`;
+      } else {
+        lorryAlertBox.classList.add('exceeded');
+        lorryStatusTitle.textContent = `⚠️ Multi-Truck Fleet Required`;
+        lorryStatusDesc.textContent = `Combined order requires ${trucks40Count}x 40FT Trailers (or ${trucks20Count}x 20FT Lorries).`;
+      }
+    }
+
+    // EXPORT PRICE CATALOG IMAGE
+    async function exportPriceListPngImage() {
+      showToast('⌛ Generating Price Catalog PNG...');
+
+      const area = currentLength * currentWidth;
+      const gradeObj = MESH_GRADE_DATA[currentGrade];
+      const todayDate = getTodayFormattedDate();
+
+      const container = document.createElement('div');
+      container.style.position = 'absolute';
+      container.style.left = '-9999px';
+      container.style.top = '0';
+      container.style.width = '640px';
+      container.style.background = '#ffffff';
+      container.style.color = '#000000';
+      container.style.padding = '24px';
+      container.style.border = '2.5px solid #000000';
+      container.style.borderRadius = '8px';
+      container.style.fontFamily = 'Arial, Helvetica, sans-serif';
+
+      let rowsHtml = '';
+      Object.keys(gradeObj.sizes).forEach(sz => {
+        const itemData = gradeObj.sizes[sz];
+        const key = `${currentGrade}_${sz}`;
+        const basePrice = itemData.sqmPrice * area;
+        const d1 = sizeDiscounts1Map[key] !== undefined ? sizeDiscounts1Map[key] : globalDiscount1Rate;
+        const d2 = sizeDiscounts2Map[key] !== undefined ? sizeDiscounts2Map[key] : globalDiscount2Rate;
+        const netPrice = sizeNetPriceMap[key] !== undefined ? sizeNetPriceMap[key] : (basePrice * (1 - d1 / 100) * (1 - d2 / 100));
+
+        rowsHtml += `
+          <tr style="border-bottom: 1px solid #000000;">
+            <td style="padding: 10px; font-weight: 800; font-size: 1rem; border: 1.5px solid #000; text-align: center;">${currentGrade}</td>
+            <td style="padding: 10px; font-weight: 800; font-size: 1rem; border: 1.5px solid #000; text-align: center;">${sz}</td>
+            <td style="padding: 10px; font-weight: 700; font-size: 0.95rem; border: 1.5px solid #000; text-align: center; color: #334155;">${itemData.ms145}</td>
+            <td style="padding: 10px; font-weight: 900; font-size: 1.05rem; border: 1.5px solid #000; text-align: right; color: #0284c7;">RM ${formatRM(netPrice)}</td>
+          </tr>
+        `;
+      });
+
+      container.innerHTML = `
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 16px; border-bottom: 2px solid #000; padding-bottom: 12px;">
+          <div>
+            <div style="font-size: 1.5rem; font-weight: 900; text-decoration: underline; color: #000; letter-spacing: 0.02em;">ECCO STEEL</div>
+            <div style="font-size: 1rem; font-weight: 800; color: #1e293b; margin-top: 4px;">PRICE LIST — GRADE ${currentGrade} (${gradeObj.name})</div>
+          </div>
+          <div style="text-align: right; font-size: 0.8rem; color: #475569; font-weight: 700;">
+            <div>Date: ${todayDate}</div>
+            <div>Std Sheet: 6.0m × 2.2m (${area.toFixed(2)}m²)</div>
+          </div>
+        </div>
+
+        <table style="width: 100%; border-collapse: collapse; text-align: center;">
+          <thead>
+            <tr style="background-color: #f1f5f9;">
+              <th style="padding: 10px; border: 1.5px solid #000; font-size: 0.88rem; font-weight: 800; text-transform: uppercase;">GRADE</th>
+              <th style="padding: 10px; border: 1.5px solid #000; font-size: 0.88rem; font-weight: 800; text-transform: uppercase;">SIZE</th>
+              <th style="padding: 10px; border: 1.5px solid #000; font-size: 0.88rem; font-weight: 800; text-transform: uppercase;">REF NO</th>
+              <th style="padding: 10px; border: 1.5px solid #000; font-size: 0.88rem; font-weight: 800; text-transform: uppercase; text-align: right;">NET PRICE (RM/PC)</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${rowsHtml}
+          </tbody>
+        </table>
+
+        <div style="margin-top: 14px; text-align: center; font-size: 0.75rem; color: #64748b; font-weight: 700;">
+          ECCO Steel Industries Sdn Bhd • Official Price List
+        </div>
+      `;
+
+      document.body.appendChild(container);
+
+      try {
+        const canvas = await html2canvas(container, {
+          scale: 2,
+          backgroundColor: '#ffffff',
+          useCORS: true,
+          logging: false
+        });
+
+        if (document.body.contains(container)) {
+          document.body.removeChild(container);
+        }
+
+        const dataUrl = canvas.toDataURL('image/png');
+        const link = document.createElement('a');
+        link.download = `ECCO_Steel_Grade_${currentGrade}_Price_List_${Date.now()}.png`;
+        link.href = dataUrl;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        showToast(`📸 Grade ${currentGrade} Price Catalog image saved!`);
+      } catch (e) {
+        if (document.body.contains(container)) {
+          document.body.removeChild(container);
+        }
+        console.error('Export Catalog PNG Error:', e);
+        showToast('❌ Export failed: ' + (e.message || 'Error'));
+      }
+    }
+
+    // REMARKS & TERMS HANDLERS
+    let currentPaymentTerm = 'CBD';
+    let currentValidityDays = 1;
+
+    window.updateHeaderTitleAndTerms = function () {
+      const todayDate = getTodayFormattedDate();
+
+      const dateEl = document.getElementById('ecco-quote-date');
+      if (dateEl) dateEl.textContent = todayDate;
+
+      const termDisplayEl = document.getElementById('ecco-term-display');
+      if (termDisplayEl) termDisplayEl.textContent = currentPaymentTerm;
+
+      const valDisplayEl = document.getElementById('ecco-validity-display');
+      if (valDisplayEl) {
+        if (currentValidityDays === '-N/A-') {
+          valDisplayEl.textContent = '-N/A-';
+        } else {
+          valDisplayEl.textContent = `${currentValidityDays} day${currentValidityDays > 1 ? 's' : ''}`;
+        }
+      }
+    };
+
+    function getTodayFormattedDate() {
+      const d = new Date();
+      const day = String(d.getDate()).padStart(2, '0');
+      const month = String(d.getMonth() + 1).padStart(2, '0');
+      const year = d.getFullYear();
+      return `${day}/${month}/${year}`;
+    }
+
+    window.setPaymentTerm = function (term) {
+      currentPaymentTerm = term;
+      document.getElementById('term-btn-cbd')?.classList.toggle('active', term === 'CBD');
+      document.getElementById('term-btn-30 DAYS')?.classList.toggle('active', term === '30 DAYS');
+      document.getElementById('term-btn-60 DAYS')?.classList.toggle('active', term === '60 DAYS');
+      updateHeaderTitleAndTerms();
+    };
+
+    window.setValidityDays = function (days) {
+      currentValidityDays = days;
+      document.querySelectorAll('#validity-btn-grid button').forEach(b => b.classList.remove('active'));
+      if (days === '-N/A-') {
+        document.getElementById('validity-preset-na')?.classList.add('active');
+      } else {
+        document.getElementById(`validity-preset-${days}`)?.classList.add('active');
+      }
+      updateHeaderTitleAndTerms();
+    };
+
+    // Theme Toggle
+    document.getElementById('theme-toggle-btn').addEventListener('click', () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('ecco-theme', newTheme);
+    });
+
+    const savedTheme = localStorage.getItem('ecco-theme');
+    if (savedTheme) {
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+
+    const toast = document.getElementById('toast-notification');
+    function showToast(msg) {
+      toast.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2200);
+    }
+
+// WHATSAPP & COPY & EXPORT QUOTATION SHEET
+    function generateWhatsAppQuoteText() {
+      const todayDate = getTodayFormattedDate();
+
+      let text = `*ECCO STEEL QUOTATION*  📅 Date: ${todayDate}\n`;
+
+      if (quotationCart.length === 0) {
+        text += `No items in quotation.\n`;
+        return text;
+      }
+
+      let grandTotalNet = 0;
+
+      text += `📦 *ITEM DETAILS:*\n`;
+      quotationCart.forEach((it, idx) => {
+        grandTotalNet += (it.totalNet || 0);
+        
+        text += `${idx + 1}. *${it.refNo}* (${it.ms145 || ''}) 6.0m × 2.2m  X   ${formatNumber(it.qty)}   X  RM${formatRM(it.finalUnit)}/pc\n`;
+      });
+
+      text += `\n📋 *REMARKS & TERMS:*\n`;
+      text += `- Payment Term: ${currentPaymentTerm}\n`;
+      text += `- Validity: ${currentValidityDays === '-N/A-' ? '-N/A-' : currentValidityDays + ' day(s)'}\n`;
+      text += `💰 *GRAND TOTAL: RM ${formatRM(grandTotalNet)}*`;
+
+      return text;
+    }
+
+    function shareToWhatsAppText() {
+      copyQuoteTextSilent();
+      showToast('📋 Quotation text copied!');
+
+      const quoteText = generateWhatsAppQuoteText();
+
+      if (navigator.share) {
+        navigator.share({
+          title: 'ECCO Steel Quotation',
+          text: quoteText
+        }).then(() => {
+          showToast('✅ Shared successfully!');
+        }).catch((err) => {
+          if (err.name !== 'AbortError') {
+            openShareModal();
+          }
+        });
+      } else {
+        openShareModal();
+      }
+    }
+
+    function openWhatsAppWaMe() {
+      const quoteText = generateWhatsAppQuoteText();
+      const encodedText = encodeURIComponent(quoteText);
+      const waMeUrl = `https://wa.me/?text=${encodedText}`;
+      window.open(waMeUrl, '_blank');
+    }
+
+    function openShareModal() {
+      copyQuoteTextSilent();
+      const modal = document.getElementById('share-modal-overlay');
+      if (modal) modal.style.display = 'flex';
+    }
+
+    function closeShareModal() {
+      const modal = document.getElementById('share-modal-overlay');
+      if (modal) modal.style.display = 'none';
+    }
+
+    function copyQuoteTextSilent() {
+      const quoteText = generateWhatsAppQuoteText();
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(quoteText).catch(() => fallbackCopyTextSilent(quoteText));
+      } else {
+        fallbackCopyTextSilent(quoteText);
+      }
+    }
+
+    function fallbackCopyTextSilent(text) {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.left = '-9999px';
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand('copy'); } catch (e) { }
+      document.body.removeChild(ta);
+    }
+
+    function copyQuoteText() {
+      const quoteText = generateWhatsAppQuoteText();
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(quoteText).then(() => {
+          showToast('📋 Quote text copied to clipboard!');
+        }).catch(() => fallbackCopyText(quoteText));
+      } else {
+        fallbackCopyText(quoteText);
+      }
+    }
+
+    function fallbackCopyText(text) {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.left = '-9999px';
+      document.body.appendChild(ta);
+      ta.select();
+      try {
+        document.execCommand('copy');
+        showToast('📋 Quote text copied to clipboard!');
+      } catch (e) {
+        showToast('❌ Copy failed');
+      }
+      document.body.removeChild(ta);
+    }
+
+    async function exportPngImage() {
+      showToast('⌛ Generating Quotation Sheet PNG...');
+
+      const targetEl = document.querySelector('.ecco-quote-container');
+      if (!targetEl) return;
+
+      const clone = targetEl.cloneNode(true);
+      clone.style.position = 'absolute';
+      clone.style.left = '-9999px';
+      clone.style.top = '0';
+      clone.style.width = '880px';
+      clone.style.maxWidth = 'none';
+      clone.style.background = '#ffffff';
+      clone.style.padding = '18px';
+      clone.style.fontFamily = 'Arial, Helvetica, sans-serif';
+
+      clone.querySelectorAll('.unit-price-input').forEach(input => {
+        const span = document.createElement('span');
+        const numVal = parseFloat(input.value || 0);
+        span.textContent = numVal.toFixed(2);
+        span.style.fontWeight = '700';
+        span.style.color = '#000000';
+        input.parentNode.replaceChild(span, input);
+      });
+
+      document.body.appendChild(clone);
+
+      try {
+        const canvas = await html2canvas(clone, {
+          scale: 2,
+          backgroundColor: '#ffffff',
+          useCORS: true,
+          logging: false,
+          windowWidth: 1000
+        });
+
+        if (document.body.contains(clone)) {
+          document.body.removeChild(clone);
+        }
+
+        const dataUrl = canvas.toDataURL('image/png');
+        const link = document.createElement('a');
+        link.download = `ECCO_BRC_Quotation_${Date.now()}.png`;
+        link.href = dataUrl;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        showToast('📸 PNG image saved to downloads!');
+      } catch (e) {
+        if (document.body.contains(clone)) {
+          document.body.removeChild(clone);
+        }
+        console.error('Export PNG Error:', e);
+        showToast('❌ PNG Export failed: ' + (e.message || 'Error'));
+      }
+    }
+
+    // PWA Manifest & SW Registration
+    const manifestJson = {
+      "name": "ECCO Steel Calculator",
+      "short_name": "ECCO Steel",
+      "start_url": "./",
+      "display": "standalone",
+      "background_color": "#0b1329",
+      "theme_color": "#0b1329"
+    };
+    const manifestBlob = new Blob([JSON.stringify(manifestJson)], { type: 'application/json' });
+    document.getElementById('manifest-placeholder').href = URL.createObjectURL(manifestBlob);
+
+    if ('serviceWorker' in navigator) {
+      const swContent = `
+        self.addEventListener('install', e => self.skipWaiting());
+        self.addEventListener('activate', e => self.clients.claim());
+        self.addEventListener('fetch', e => e.respondWith(caches.match(e.request).then(res => res || fetch(e.request).catch(() => caches.match('./')))));
+      `;
+      try {
+        navigator.serviceWorker.register(URL.createObjectURL(new Blob([swContent], { type: 'application/javascript' }))).catch(() => { });
+      } catch (e) { }
+    }
+
+    // Init App
+    renderCatalogTable();
+    updateHeaderTitleAndTerms();
+  </script>
+</body>
+
+</html>
